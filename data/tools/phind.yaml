@@ -1,0 +1,14 @@
+id: phind
+name: Phind
+url: https://www.phind.com
+category: search
+deployment: saas
+pricing: freemium
+description: AI search engine optimized for developers with code examples and technical answers.
+bestFor:
+  - programming questions with code snippets
+  - debugging and framework-specific lookup
+notFor:
+  - non-technical marketing copy
+  - local private inference
+tags: [search, developer, code, technical]

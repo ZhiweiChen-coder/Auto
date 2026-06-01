@@ -1,0 +1,14 @@
+id: descript
+name: Descript
+url: https://www.descript.com
+category: video
+deployment: saas
+pricing: freemium
+description: Video and podcast editor with AI voice, transcription, and text-based editing.
+bestFor:
+  - editing podcasts and talking-head videos
+  - transcription and overdub voice
+notFor:
+  - generating raw video from text alone
+  - software development
+tags: [video, audio, podcast, editing]

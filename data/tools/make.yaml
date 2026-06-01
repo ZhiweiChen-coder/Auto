@@ -1,0 +1,14 @@
+id: make
+name: Make
+url: https://www.make.com
+category: automation
+deployment: saas
+pricing: freemium
+description: Visual automation platform (formerly Integromat) for complex multi-step scenarios across apps.
+bestFor:
+  - visual complex automations with branching
+  - power users connecting many SaaS tools
+notFor:
+  - writing a novel or long essay
+  - local-only privacy requirements
+tags: [automation, workflow, visual, integrations]

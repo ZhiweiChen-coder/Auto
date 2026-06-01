@@ -1,0 +1,16 @@
+id: wix-ai-website-builder
+name: Wix AI Website Builder
+url: https://www.wix.com/ai-website-builder
+category: app-builder
+deployment: saas
+pricing: freemium
+description: AI website builder that helps beginners create publish-ready business websites through a guided conversation.
+bestFor:
+  - small business websites
+  - beginners who do not code
+  - fast publish-ready sites
+notFor:
+  - custom full-stack apps
+  - local development workflows
+tags: [website-builder, no-code, small-business, beginner]
+

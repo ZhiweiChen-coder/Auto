@@ -1,0 +1,14 @@
+id: dall-e
+name: DALL·E
+url: https://openai.com/dall-e-3
+category: image
+deployment: saas
+pricing: freemium
+description: OpenAI image generation integrated with ChatGPT for prompts-to-image with editing support.
+bestFor:
+  - quick images inside ChatGPT workflow
+  - simple marketing assets
+notFor:
+  - highest-end artistic control (Midjourney may win)
+  - video production
+tags: [image, openai, chatgpt]

@@ -1,0 +1,16 @@
+id: sourcegraph-cody
+name: Sourcegraph Cody
+url: https://sourcegraph.com/cody
+category: coding
+deployment: saas
+pricing: freemium
+description: AI coding assistant focused on codebase understanding, code search, explanations, and edits.
+bestFor:
+  - asking questions about large codebases
+  - code search and explanations
+  - developer workflows in IDEs
+notFor:
+  - no-code website building
+  - AI image generation
+tags: [coding, codebase, ide, search]
+

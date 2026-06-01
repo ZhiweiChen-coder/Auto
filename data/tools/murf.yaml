@@ -1,0 +1,16 @@
+id: murf
+name: Murf
+url: https://murf.ai
+category: video
+deployment: saas
+pricing: freemium
+description: AI voice generator for voiceovers, narration, presentations, videos, and training content.
+bestFor:
+  - voiceovers without recording equipment
+  - narration for videos and courses
+  - polished business audio
+notFor:
+  - custom web application building
+  - research citation discovery
+tags: [voice, audio, narration, video]
+

@@ -1,0 +1,16 @@
+id: anythingllm
+name: AnythingLLM
+url: https://anythingllm.com
+category: local
+deployment: hybrid
+pricing: freemium
+description: Private AI workspace for chatting with documents using local or cloud LLM providers.
+bestFor:
+  - private document chat
+  - local or self-hosted AI knowledge bases
+  - teams wanting control over models and data
+notFor:
+  - quick social graphics
+  - polished video generation
+tags: [local, documents, rag, private]
+

@@ -1,0 +1,16 @@
+id: fireflies
+name: Fireflies.ai
+url: https://fireflies.ai
+category: automation
+deployment: saas
+pricing: freemium
+description: AI meeting assistant that records, transcribes, summarizes, and searches conversations across meeting platforms.
+bestFor:
+  - meeting notes and summaries
+  - searchable call transcripts
+  - team follow-up workflows
+notFor:
+  - image generation
+  - building websites
+tags: [meetings, transcription, notes, automation]
+

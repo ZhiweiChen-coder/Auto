@@ -1,0 +1,14 @@
+id: elevenlabs
+name: ElevenLabs
+url: https://elevenlabs.io
+category: general
+deployment: saas
+pricing: freemium
+description: AI voice synthesis and cloning for narration, dubbing, and conversational agents.
+bestFor:
+  - realistic text-to-speech and voiceovers
+  - podcast and video narration
+notFor:
+  - image generation
+  - codebase refactoring
+tags: [audio, voice, tts, narration]

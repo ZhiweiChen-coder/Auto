@@ -1,0 +1,16 @@
+id: krea
+name: Krea
+url: https://www.krea.ai
+category: image
+deployment: saas
+pricing: freemium
+description: Creative AI platform for real-time image generation, enhancement, and visual exploration.
+bestFor:
+  - visual brainstorming
+  - image upscaling and enhancement
+  - creative direction boards
+notFor:
+  - meeting transcription
+  - backend application development
+tags: [image, creative, upscaling, real-time]
+

@@ -1,0 +1,14 @@
+id: replicate
+name: Replicate
+url: https://replicate.com
+category: general
+deployment: api
+pricing: freemium
+description: API platform to run open-source AI models for image, video, audio, and LLMs via HTTP.
+bestFor:
+  - developers integrating many models via API
+  - server-side inference without managing GPUs
+notFor:
+  - non-technical users wanting a simple chat UI
+  - fully offline workflows
+tags: [api, models, developers, inference]

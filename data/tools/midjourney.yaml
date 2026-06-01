@@ -1,0 +1,14 @@
+id: midjourney
+name: Midjourney
+url: https://www.midjourney.com
+category: image
+deployment: saas
+pricing: paid
+description: High-quality AI image generation known for artistic and stylized visuals via Discord or web.
+bestFor:
+  - marketing visuals and concept art
+  - stylized illustrations and posters
+notFor:
+  - precise UI mockups for dev handoff
+  - video generation
+tags: [image, art, creative, discord]

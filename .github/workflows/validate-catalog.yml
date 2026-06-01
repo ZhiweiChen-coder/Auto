@@ -1,0 +1,27 @@
+name: Validate catalog
+
+on:
+  pull_request:
+    paths:
+      - "data/tools/**"
+      - "packages/catalog/**"
+  push:
+    branches: [main]
+    paths:
+      - "data/tools/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm build --filter @auto/catalog
+      - run: pnpm validate-catalog

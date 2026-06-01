@@ -1,0 +1,16 @@
+id: poe
+name: Poe
+url: https://poe.com
+category: general
+deployment: saas
+pricing: freemium
+description: Multi-model AI chat platform for trying and comparing many popular language and image models.
+bestFor:
+  - comparing AI models in one place
+  - general chat and writing tasks
+  - experimenting with custom bots
+notFor:
+  - source-controlled coding inside an IDE
+  - full meeting transcription workflows
+tags: [chat, multi-model, bots, general]
+

@@ -1,0 +1,15 @@
+id: claude
+name: Claude
+url: https://claude.ai
+category: writing
+deployment: saas
+pricing: freemium
+description: Anthropic's conversational AI strong at long documents, analysis, coding help, and careful reasoning.
+bestFor:
+  - long-form writing and editing
+  - document analysis and summarization
+  - nuanced reasoning and drafting
+notFor:
+  - live web search with citations (use a search tool)
+  - one-click deployed web apps
+tags: [writing, chat, anthropic, reasoning]

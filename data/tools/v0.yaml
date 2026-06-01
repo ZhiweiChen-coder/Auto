@@ -1,0 +1,15 @@
+id: v0
+name: v0 by Vercel
+url: https://v0.dev
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Generative UI tool that produces React/Tailwind components and pages from prompts.
+bestFor:
+  - React and Next.js UI components quickly
+  - design-to-code for marketing pages
+  - developers who want copy-paste shadcn-style output
+notFor:
+  - complete backend systems
+  - non-web native mobile apps
+tags: [app-builder, react, ui, vercel]

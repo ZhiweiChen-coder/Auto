@@ -1,0 +1,16 @@
+id: leonardo-ai
+name: Leonardo AI
+url: https://leonardo.ai
+category: image
+deployment: saas
+pricing: freemium
+description: AI image generation platform for art, game assets, product visuals, and creative design workflows.
+bestFor:
+  - game and concept art
+  - stylized product visuals
+  - creative asset generation
+notFor:
+  - document summarization
+  - app deployment
+tags: [image, art, game-assets, design]
+

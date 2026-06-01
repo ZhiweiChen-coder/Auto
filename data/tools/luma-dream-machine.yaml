@@ -1,0 +1,16 @@
+id: luma-dream-machine
+name: Luma Dream Machine
+url: https://lumalabs.ai/dream-machine
+category: video
+deployment: saas
+pricing: freemium
+description: AI video generation tool for creating motion clips from prompts and visual ideas.
+bestFor:
+  - cinematic AI video clips
+  - image-to-video experiments
+  - creative motion ideation
+notFor:
+  - business process automation
+  - writing cited research reports
+tags: [video, generative, cinematic, motion]
+

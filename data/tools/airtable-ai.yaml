@@ -1,0 +1,16 @@
+id: airtable-ai
+name: Airtable AI
+url: https://www.airtable.com/platform/ai
+category: automation
+deployment: saas
+pricing: paid
+description: AI features inside Airtable for organizing data, summarizing records, generating content, and building workflows.
+bestFor:
+  - teams managing structured business data
+  - lightweight CRM and operations workflows
+  - summarizing or generating fields in databases
+notFor:
+  - one-off image generation
+  - local offline automation
+tags: [automation, database, operations, no-code]
+

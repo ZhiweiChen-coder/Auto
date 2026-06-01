@@ -1,0 +1,16 @@
+id: grammarly
+name: Grammarly
+url: https://www.grammarly.com
+category: writing
+deployment: saas
+pricing: freemium
+description: AI writing assistant for grammar, clarity, tone, rewriting, and everyday communication.
+bestFor:
+  - polishing emails and documents
+  - fixing grammar and tone
+  - writing across browser-based apps
+notFor:
+  - long-form research discovery
+  - video production
+tags: [writing, grammar, email, productivity]
+

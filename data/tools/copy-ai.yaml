@@ -1,0 +1,16 @@
+id: copy-ai
+name: Copy.ai
+url: https://www.copy.ai
+category: writing
+deployment: saas
+pricing: freemium
+description: AI writing and go-to-market platform for marketing copy, sales content, and repeatable content workflows.
+bestFor:
+  - marketing copy and sales emails
+  - campaign messaging drafts
+  - repeatable content operations
+notFor:
+  - local private inference
+  - precise scientific search
+tags: [writing, marketing, sales, copywriting]
+

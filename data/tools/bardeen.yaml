@@ -1,0 +1,16 @@
+id: bardeen
+name: Bardeen
+url: https://www.bardeen.ai
+category: automation
+deployment: saas
+pricing: freemium
+description: Browser automation tool that uses AI to automate repetitive web tasks across apps and websites.
+bestFor:
+  - browser-based sales and research workflows
+  - scraping public web data into spreadsheets
+  - automating repetitive SaaS tasks
+notFor:
+  - image or video generation
+  - large backend systems
+tags: [automation, browser, scraping, productivity]
+

@@ -1,0 +1,15 @@
+id: lovable
+name: Lovable
+url: https://lovable.dev
+category: app-builder
+deployment: saas
+pricing: freemium
+description: AI app builder that generates full-stack web apps from natural language with deploy-ready output.
+bestFor:
+  - shipping a landing page or web app fast
+  - non-developers prototyping SaaS ideas
+  - iterating on UI with chat
+notFor:
+  - maintaining a large legacy codebase
+  - backend-only CLI workflows
+tags: [app-builder, web, full-stack, no-code]

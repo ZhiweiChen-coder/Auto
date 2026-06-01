@@ -1,0 +1,15 @@
+id: perplexity
+name: Perplexity
+url: https://www.perplexity.ai
+category: search
+deployment: saas
+pricing: freemium
+description: AI-powered search engine with live web results, citations, and follow-up questions.
+bestFor:
+  - real-time web research with sources
+  - fact-checking current events
+  - quick answers that need citations
+notFor:
+  - building production applications
+  - offline or fully private workflows
+tags: [search, citations, research, web]

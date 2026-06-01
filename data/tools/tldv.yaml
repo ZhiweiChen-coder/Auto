@@ -1,0 +1,16 @@
+id: tldv
+name: tl;dv
+url: https://tldv.io
+category: automation
+deployment: saas
+pricing: freemium
+description: AI meeting recorder for transcribing, summarizing, clipping, and sharing video meeting insights.
+bestFor:
+  - meeting summaries and highlights
+  - sales and customer call review
+  - shareable meeting clips
+notFor:
+  - image generation
+  - local LLM hosting
+tags: [meetings, transcription, summaries, clips]
+

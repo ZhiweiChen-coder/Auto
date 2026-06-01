@@ -1,0 +1,157 @@
+# Auto — Open-Source AI Tool Recommender
+
+**Auto does not answer your question.** It tells you which existing AI product to use.
+
+- Need live web research with citations? → [Perplexity](https://www.perplexity.ai)
+- Need a landing page today? → [Lovable](https://lovable.dev), [v0](https://v0.dev), or [Bolt](https://bolt.new)
+- Need to refactor a large codebase? → [Cursor](https://cursor.com)
+
+Unlike generic chatbots or self-hosted agents, Auto routes your **task** to the best **ready-made tool** from a curated, community-editable catalog.
+
+## How it works
+
+```mermaid
+flowchart LR
+  Query[Your query] --> Embed[Embed query]
+  Embed --> Shortlist[Top 8 from catalog]
+  Shortlist --> LLM[LLM rank and explain]
+  LLM --> Result[Primary + alternatives]
+```
+
+1. **Embeddings** shortlist the most relevant tools from `data/tools/`.
+2. **LLM** picks only from that shortlist and explains why (no hallucinated products).
+
+## Quick start
+
+### Prerequisites
+
+- Node.js 20+
+- [pnpm](https://pnpm.io) 9+
+- OpenAI API key (for embeddings at index time and recommendations at runtime)
+
+### Setup
+
+```bash
+pnpm install
+pnpm build
+
+# Generate embeddings
+# Production quality (requires OPENAI_API_KEY):
+export OPENAI_API_KEY=sk-...
+pnpm index-catalog
+
+# Dev/CI mock embeddings (committed by default; ranker still needs OPENAI_API_KEY):
+pnpm index-catalog:mock
+
+# Run the web app + API
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Deployment notes live in [docs/deployment.md](docs/deployment.md).
+
+### Environment variables
+
+Create **`apps/web/.env.local`** (or repo root `.env.local`) with your OpenAI key:
+
+```bash
+cp apps/web/.env.example apps/web/.env.local
+# Edit apps/web/.env.local and set OPENAI_API_KEY=sk-...
+```
+
+Restart the dev server after saving.
+
+| Variable | Description |
+|----------|-------------|
+| `OPENAI_API_KEY` | **Required** — powers recommendations and catalog indexing |
+| `EMBEDDING_MODEL` | Default: `text-embedding-3-small` |
+| `RANKER_MODEL` | Default: `gpt-4o-mini` |
+| `ADMIN_TOKEN` | Optional — enables `/admin/login` and protects `/admin/feedback` |
+| `FEEDBACK_STORE` | Default: `file`; use `webhook` for deployed/serverless feedback |
+| `FEEDBACK_WEBHOOK_URL` | Optional — receives feedback records in production |
+| `FEEDBACK_WEBHOOK_SECRET` | Optional bearer token for the feedback webhook |
+
+## Public API
+
+### `POST /api/v1/recommend`
+
+```bash
+curl -X POST http://localhost:3000/api/v1/recommend \
+  -H "Content-Type: application/json" \
+  -d '{"query": "find SEC filings for Apple with sources", "limit": 2}'
+```
+
+**Response:**
+
+```json
+{
+  "query": "find SEC filings for Apple with sources",
+  "primary": {
+    "toolId": "perplexity",
+    "confidence": "high",
+    "reason": "..."
+  },
+  "alternatives": [{ "toolId": "you-com", "reason": "..." }],
+  "workflowTip": "optional",
+  "avoid": "optional"
+}
+```
+
+### Bring your own key (BYOK)
+
+Pass your OpenAI key instead of using the server default:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/recommend \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-your-key" \
+  -d '{"query": "build a SaaS dashboard"}'
+```
+
+### Other endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/api/v1/tools` | List catalog (`?category=search&page=1`) |
+| `GET` | `/api/v1/tools/:id` | Single tool |
+| `POST` | `/api/v1/feedback` | Save lightweight recommendation feedback |
+| `GET` | `/api/v1/health` | Health + catalog version |
+
+Rate limit: 20 requests/minute per IP on `/api/v1/recommend`.
+
+## Project structure
+
+```
+apps/web/           Next.js UI + API routes
+packages/catalog/   Zod schemas + YAML loader
+packages/core/      Hybrid recommend engine
+data/tools/         Curated tool YAML files
+data/embeddings.json Precomputed vectors (generated)
+data/feedback.jsonl Local feedback log (ignored)
+scripts/            index-catalog, validate-catalog
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to add or edit tools in `data/tools/`.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Features
+
+- **Hybrid routing** — embeddings shortlist + LLM rank (grounded to catalog only)
+- **Clarification** — vague or ambiguous queries get follow-up questions instead of weak picks
+- **Recent searches** — stored locally in your browser
+- **Feedback loop** — quick result ratings saved for recommendation tuning
+- **Shareable results** — copy link with query preserved
+- **Browse + search** — filter the full catalog
+- **Public API** — see `/docs` in the app or [openapi.yaml](openapi.yaml)
+
+## Roadmap
+
+- MCP server for agent integrations
+- Production embedding index in CI
+- Community voting on tool entries

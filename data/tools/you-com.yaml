@@ -1,0 +1,14 @@
+id: you-com
+name: You.com
+url: https://you.com
+category: search
+deployment: saas
+pricing: freemium
+description: AI search and chat with web access, agents, and customizable modes for research.
+bestFor:
+  - web search with multiple AI modes
+  - research with source links
+notFor:
+  - deep codebase refactoring
+  - local offline inference
+tags: [search, web, research]

@@ -1,0 +1,14 @@
+id: firecrawl
+name: Firecrawl
+url: https://www.firecrawl.dev
+category: search
+deployment: api
+pricing: freemium
+description: API to crawl and extract clean markdown from websites for LLM pipelines and research agents.
+bestFor:
+  - scraping sites for RAG and agents
+  - developers building research pipelines
+notFor:
+  - non-technical end users
+  - one-click chat answers without setup
+tags: [search, api, scraping, developers]

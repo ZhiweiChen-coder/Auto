@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 247, 251, 0.92)),
+    #f6f7fb;
+  color: #1d1d1f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .textarea-hero {
+    field-sizing: content;
+  }
+}
+
+@keyframes home-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes soft-grid {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 48px 48px, -48px -48px;
+  }
+}
+
+@keyframes loading-row {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes loading-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loading-bar {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes loading-panel {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes result-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chain-node {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chain-active {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 61, 255, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(139, 61, 255, 0);
+  }
+}
+
+@keyframes route-shimmer {
+  from {
+    background-position: -220px 0;
+  }
+  to {
+    background-position: calc(220px + 100%) 0;
+  }
+}
+
+.home-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-stage::before {
+  animation: soft-grid 16s linear infinite;
+  background-image:
+    linear-gradient(rgba(29, 29, 31, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 29, 31, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.home-enter {
+  animation: home-enter 520ms ease-out both;
+  position: relative;
+}
+
+.loading-panel {
+  animation: loading-panel 420ms ease-out both;
+}
+
+.loading-row {
+  animation: loading-row 1.8s ease-in-out infinite;
+}
+
+.loading-dot {
+  animation: loading-dot 1.1s ease-in-out infinite;
+}
+
+.loading-bar {
+  animation: loading-bar 1.35s ease-in-out infinite;
+}
+
+.loading-routes > div {
+  animation: home-enter 520ms ease-out both;
+}
+
+.loading-routes > div:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.loading-routes > div:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.result-enter {
+  animation: result-enter 420ms ease-out both;
+}
+
+.result-chain {
+  animation: result-enter 360ms ease-out both;
+}
+
+.chain-node {
+  animation: chain-node 360ms ease-out both;
+}
+
+.chain-node:has(+ .chain-node)::after {
+  background: linear-gradient(90deg, rgba(139, 61, 255, 0.28), rgba(139, 61, 255, 0));
+  content: "";
+  display: none;
+  height: 1px;
+  left: calc(100% + 4px);
+  position: absolute;
+  top: 50%;
+  width: 10px;
+}
+
+@media (min-width: 768px) {
+  .chain-node:has(+ .chain-node)::after {
+    display: block;
+  }
+}
+
+.chain-node[class*="border-canvas-brand"] {
+  animation:
+    chain-node 360ms ease-out both,
+    chain-active 1.35s ease-in-out infinite 360ms;
+}
+
+.route-shimmer {
+  overflow: hidden;
+  position: relative;
+}
+
+.route-shimmer::after {
+  animation: route-shimmer 1.25s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.76), transparent);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: skewX(-12deg);
+}

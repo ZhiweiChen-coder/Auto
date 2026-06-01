@@ -1,0 +1,14 @@
+id: gamma
+name: Gamma
+url: https://gamma.app
+category: writing
+deployment: saas
+pricing: freemium
+description: AI presentation and document builder that generates slide decks and pages from prompts.
+bestFor:
+  - pitch decks and slide presentations fast
+  - turning outlines into polished decks
+notFor:
+  - production React applications
+  - local LLM inference
+tags: [writing, presentations, slides, design]

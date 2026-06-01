@@ -1,0 +1,16 @@
+id: scispace
+name: SciSpace
+url: https://typeset.io
+category: search
+deployment: saas
+pricing: freemium
+description: AI research assistant for literature search, paper explanations, PDF chat, and academic writing support.
+bestFor:
+  - understanding academic papers
+  - chatting with PDFs
+  - literature review workflows
+notFor:
+  - social graphics
+  - app deployment
+tags: [research, academic, pdf, literature-review]
+

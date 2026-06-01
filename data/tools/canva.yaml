@@ -1,0 +1,16 @@
+id: canva
+name: Canva
+url: https://www.canva.com
+category: image
+deployment: saas
+pricing: freemium
+description: Beginner-friendly design platform with templates and Magic Studio AI tools for graphics, documents, and videos.
+bestFor:
+  - social media designs and posters
+  - non-designers using templates
+  - quick brand assets and simple videos
+notFor:
+  - custom coded applications
+  - highly technical research workflows
+tags: [design, templates, social-media, beginner]
+

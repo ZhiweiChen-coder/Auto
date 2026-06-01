@@ -1,0 +1,14 @@
+id: suno
+name: Suno
+url: https://suno.com
+category: general
+deployment: saas
+pricing: freemium
+description: AI music generation from text prompts including vocals, lyrics, and full songs.
+bestFor:
+  - quick royalty-free music drafts
+  - creative songwriting experiments
+notFor:
+  - software development
+  - document research
+tags: [audio, music, creative]

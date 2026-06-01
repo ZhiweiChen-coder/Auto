@@ -1,0 +1,16 @@
+id: elicit
+name: Elicit
+url: https://elicit.com
+category: search
+deployment: saas
+pricing: freemium
+description: AI research assistant for finding papers, extracting study details, and speeding up literature reviews.
+bestFor:
+  - academic literature review workflows
+  - comparing studies and evidence
+  - extracting structured information from papers
+notFor:
+  - social media image design
+  - no-code app building
+tags: [research, academic, literature-review, papers]
+

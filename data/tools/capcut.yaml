@@ -1,0 +1,16 @@
+id: capcut
+name: CapCut
+url: https://www.capcut.com
+category: video
+deployment: saas
+pricing: freemium
+description: Video editor with templates, captions, effects, and AI tools for short-form creator and marketing videos.
+bestFor:
+  - TikTok, Reels, and YouTube Shorts editing
+  - automatic captions and quick templates
+  - beginner-friendly video production
+notFor:
+  - academic literature search
+  - app development
+tags: [video, editing, captions, social-media]
+

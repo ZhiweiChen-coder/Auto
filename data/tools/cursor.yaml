@@ -1,0 +1,15 @@
+id: cursor
+name: Cursor
+url: https://cursor.com
+category: coding
+deployment: saas
+pricing: freemium
+description: AI-native code editor forked from VS Code with agentic editing, codebase awareness, and multi-file changes.
+bestFor:
+  - refactoring large codebases
+  - agentic multi-file feature work
+  - daily development with AI pair programming
+notFor:
+  - one-off web page generation without code
+  - users who only need a chat tab
+tags: [coding, ide, agent, vscode]

@@ -1,0 +1,16 @@
+id: jan
+name: Jan
+url: https://jan.ai
+category: local
+deployment: local
+pricing: free
+description: Local AI app for running and chatting with open-source language models on your own machine.
+bestFor:
+  - private local chatbot use
+  - experimenting with open-source models
+  - offline-friendly AI workflows
+notFor:
+  - polished design templates
+  - hosted web app deployment
+tags: [local, llm, open-source, privacy]
+

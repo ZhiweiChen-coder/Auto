@@ -1,0 +1,16 @@
+id: power-automate
+name: Microsoft Power Automate
+url: https://powerautomate.microsoft.com
+category: automation
+deployment: saas
+pricing: paid
+description: Microsoft workflow automation platform for connecting apps, approvals, documents, and business processes.
+bestFor:
+  - Microsoft 365 business automations
+  - approvals and document workflows
+  - enterprise no-code processes
+notFor:
+  - quick social media graphics
+  - artistic image generation
+tags: [automation, microsoft, workflows, enterprise]
+

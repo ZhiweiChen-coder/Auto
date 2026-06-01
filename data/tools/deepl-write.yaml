@@ -1,0 +1,16 @@
+id: deepl-write
+name: DeepL Write
+url: https://www.deepl.com/write
+category: writing
+deployment: saas
+pricing: freemium
+description: AI writing assistant for improving clarity, tone, phrasing, and multilingual writing.
+bestFor:
+  - polishing emails and essays
+  - improving tone and clarity
+  - multilingual business writing
+notFor:
+  - generating videos
+  - building web apps
+tags: [writing, translation, editing, tone]
+

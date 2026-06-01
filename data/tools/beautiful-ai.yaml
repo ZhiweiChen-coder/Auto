@@ -1,0 +1,16 @@
+id: beautiful-ai
+name: Beautiful.ai
+url: https://www.beautiful.ai
+category: writing
+deployment: saas
+pricing: paid
+description: Presentation builder with smart slide layouts and AI-assisted deck creation for business users.
+bestFor:
+  - professional business presentations
+  - teams that want consistent slide design
+  - pitch decks and sales decks
+notFor:
+  - custom software development
+  - cinematic video generation
+tags: [presentations, slides, business, design]
+

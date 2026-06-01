@@ -1,0 +1,14 @@
+id: runway
+name: Runway
+url: https://runwayml.com
+category: video
+deployment: saas
+pricing: freemium
+description: AI video creation suite with Gen-3 models, editing tools, and motion from text or images.
+bestFor:
+  - AI-generated video clips and b-roll
+  - creative video experiments and ads
+notFor:
+  - writing long documents
+  - software development
+tags: [video, generative, editing, creative]

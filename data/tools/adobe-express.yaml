@@ -1,0 +1,16 @@
+id: adobe-express
+name: Adobe Express
+url: https://www.adobe.com/express
+category: image
+deployment: saas
+pricing: freemium
+description: Browser-based design app for social posts, flyers, videos, and brand assets with Adobe AI features.
+bestFor:
+  - beginner-friendly social graphics and flyers
+  - brand-safe designs using Adobe templates
+  - quick content edits in a browser
+notFor:
+  - complex code-heavy websites
+  - local private image generation
+tags: [design, social-media, templates, adobe]
+

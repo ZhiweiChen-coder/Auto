@@ -1,0 +1,14 @@
+id: bolt
+name: Bolt.new
+url: https://bolt.new
+category: app-builder
+deployment: saas
+pricing: freemium
+description: In-browser AI full-stack builder powered by WebContainers for instant preview and edit.
+bestFor:
+  - quick full-stack prototypes in the browser
+  - hackathon demos without local setup
+notFor:
+  - enterprise codebases with strict compliance
+  - long-term maintenance of complex systems
+tags: [app-builder, full-stack, browser, prototype]

@@ -1,0 +1,15 @@
+id: ollama
+name: Ollama
+url: https://ollama.com
+category: local
+deployment: local
+pricing: free
+description: Run open-weight LLMs locally with a simple CLI and API on macOS, Linux, and Windows.
+bestFor:
+  - private offline inference
+  - experimenting with open models locally
+  - developers who want a local API
+notFor:
+  - instant zero-setup web search
+  - non-technical users without install steps
+tags: [local, llm, open-source, privacy]

@@ -1,0 +1,16 @@
+id: pika
+name: Pika
+url: https://pika.art
+category: video
+deployment: saas
+pricing: freemium
+description: AI video generation platform that turns text, images, and ideas into short dynamic clips.
+bestFor:
+  - short AI video clips
+  - image-to-video creative experiments
+  - social video concepts
+notFor:
+  - document editing
+  - workflow automation
+tags: [video, generative, social, creative]
+

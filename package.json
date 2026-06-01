@@ -1,0 +1,29 @@
+{
+  "name": "auto",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Open-source AI tool recommender — routes your task to the best existing product",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @auto/web dev",
+    "dev:clean": "pnpm --filter @auto/web exec rm -rf .next && pnpm dev",
+    "start": "pnpm --filter @auto/web start",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r run typecheck",
+    "index-catalog": "tsx scripts/index-catalog.ts",
+    "index-catalog:mock": "tsx scripts/index-catalog-mock.ts",
+    "validate-catalog": "tsx scripts/validate-catalog.ts",
+    "test:recommend": "tsx scripts/test-recommend.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "devDependencies": {
+    "@auto/catalog": "workspace:*",
+    "@auto/core": "workspace:*",
+    "openai": "^4.77.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

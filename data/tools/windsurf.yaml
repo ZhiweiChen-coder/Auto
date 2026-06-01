@@ -1,0 +1,14 @@
+id: windsurf
+name: Windsurf
+url: https://codeium.com/windsurf
+category: coding
+deployment: saas
+pricing: freemium
+description: AI IDE with Cascade agent for flow-state coding, deep context, and autonomous edits.
+bestFor:
+  - agentic coding sessions with strong context
+  - developers wanting a Copilot/Cursor alternative
+notFor:
+  - no-code landing pages
+  - pure search and research tasks
+tags: [coding, ide, agent, codeium]

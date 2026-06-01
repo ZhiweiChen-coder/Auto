@@ -1,0 +1,16 @@
+id: framer
+name: Framer
+url: https://www.framer.com
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Visual website builder with AI-assisted site generation, responsive design, CMS, and publishing.
+bestFor:
+  - polished marketing websites
+  - designers building responsive sites
+  - landing pages with visual control
+notFor:
+  - complex backend applications
+  - local offline AI workflows
+tags: [website-builder, design, no-code, landing-page]
+

@@ -1,0 +1,15 @@
+id: writesonic
+name: Writesonic
+url: https://writesonic.com
+category: writing
+deployment: saas
+pricing: freemium
+description: AI writing and marketing platform for blog posts, ads, SEO content, and brand-aware copy.
+bestFor:
+  - SEO blog drafts
+  - ads and marketing copy
+  - content teams needing fast drafts
+notFor:
+  - local private inference
+  - video editing
+tags: [writing, marketing, seo, copywriting]

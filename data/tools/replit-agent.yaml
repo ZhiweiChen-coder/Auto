@@ -1,0 +1,14 @@
+id: replit-agent
+name: Replit Agent
+url: https://replit.com
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Cloud IDE with an AI agent that builds, runs, and deploys apps from natural language.
+bestFor:
+  - building and hosting small apps in one place
+  - beginners learning by doing in the cloud
+notFor:
+  - large monorepos on local machines
+  - air-gapped environments
+tags: [app-builder, ide, cloud, deploy]

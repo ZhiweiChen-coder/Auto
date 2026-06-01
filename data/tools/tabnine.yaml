@@ -1,0 +1,16 @@
+id: tabnine
+name: Tabnine
+url: https://www.tabnine.com
+category: coding
+deployment: hybrid
+pricing: freemium
+description: AI code assistant for completions, chat, and software development with enterprise privacy controls.
+bestFor:
+  - code completions in IDEs
+  - privacy-conscious development teams
+  - enterprise coding assistance
+notFor:
+  - no-code social graphics
+  - academic paper discovery
+tags: [coding, autocomplete, ide, enterprise]
+

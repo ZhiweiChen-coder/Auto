@@ -1,0 +1,16 @@
+id: quillbot
+name: QuillBot
+url: https://quillbot.com
+category: writing
+deployment: saas
+pricing: freemium
+description: AI writing toolkit for paraphrasing, summarizing, grammar checking, citations, and rewriting drafts.
+bestFor:
+  - paraphrasing and rewriting text
+  - student-friendly summaries
+  - quick grammar improvements
+notFor:
+  - original academic research
+  - building websites
+tags: [writing, paraphrasing, grammar, summarization]
+

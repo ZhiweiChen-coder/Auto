@@ -1,0 +1,16 @@
+id: jasper
+name: Jasper
+url: https://www.jasper.ai
+category: writing
+deployment: saas
+pricing: paid
+description: AI marketing platform for brand-controlled content, campaigns, and repeatable marketing workflows.
+bestFor:
+  - marketing teams producing content at scale
+  - brand voice and campaign copy
+  - structured go-to-market workflows
+notFor:
+  - casual free writing tasks
+  - local private LLM use
+tags: [writing, marketing, brand, campaigns]
+

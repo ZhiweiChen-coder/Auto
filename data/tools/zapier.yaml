@@ -1,0 +1,14 @@
+id: zapier
+name: Zapier
+url: https://zapier.com
+category: automation
+deployment: saas
+pricing: freemium
+description: No-code automation connecting thousands of apps with triggers, actions, and AI-powered steps.
+bestFor:
+  - non-technical users automating SaaS tools
+  - quick zaps between popular services
+notFor:
+  - complex self-hosted pipelines
+  - deep code refactoring
+tags: [automation, no-code, integrations, saas]

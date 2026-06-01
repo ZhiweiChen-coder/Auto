@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Auto API
+  description: AI tool recommender — routes tasks to the best existing product.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local dev
+paths:
+  /api/v1/recommend:
+    post:
+      summary: Recommend tools for a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  minLength: 1
+                  maxLength: 2000
+                limit:
+                  type: integer
+                  minimum: 0
+                  maximum: 3
+      responses:
+        "200":
+          description: Recommendation or clarification request
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [query]
+                properties:
+                  query:
+                    type: string
+                  task:
+                    type: object
+                    properties:
+                      intent:
+                        type: string
+                        enum:
+                          - writing
+                          - design
+                          - video-audio
+                          - research-learning
+                          - coding-website
+                          - automation-productivity
+                          - business-marketing
+                          - general
+                      output:
+                        type: string
+                      userLevel:
+                        type: string
+                        enum: [beginner, intermediate, advanced]
+                      plainSummary:
+                        type: string
+                  primary:
+                    type: object
+                    properties:
+                      toolId:
+                        type: string
+                      confidence:
+                        type: string
+                        enum: [high, medium]
+                      reason:
+                        type: string
+                  alternatives:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        toolId:
+                          type: string
+                        reason:
+                          type: string
+                  actionGuide:
+                    type: object
+                    properties:
+                      firstSteps:
+                        type: array
+                        items:
+                          type: string
+                      copyPrompt:
+                        type: string
+                      beginnerNote:
+                        type: string
+                  routeCards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          enum:
+                            - Fastest route
+                            - Cheapest route
+                            - Highest quality route
+                        bestFor:
+                          type: string
+                        toolIds:
+                          type: array
+                          items:
+                            type: string
+                        steps:
+                          type: array
+                          items:
+                            type: string
+                        tradeoff:
+                          type: string
+                  workflowTip:
+                    type: string
+                  avoid:
+                    type: string
+                  needsClarification:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      questions:
+                        type: array
+                        items:
+                          type: string
+        "401":
+          description: Missing API key
+        "429":
+          description: Rate limited
+  /api/v1/tools:
+    get:
+      summary: List catalog tools
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Paginated tool list
+  /api/v1/tools/{id}:
+    get:
+      summary: Get one tool
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Tool object
+        "404":
+          description: Not found
+  /api/v1/feedback:
+    post:
+      summary: Save recommendation feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query, rating]
+              properties:
+                query:
+                  type: string
+                  minLength: 1
+                  maxLength: 2000
+                rating:
+                  type: string
+                  enum: [good_match, not_right, too_advanced]
+                primaryToolId:
+                  type: string
+                alternativeToolIds:
+                  type: array
+                  maxItems: 3
+                  items:
+                    type: string
+                routeLabels:
+                  type: array
+                  maxItems: 3
+                  items:
+                    type: string
+                elapsedMs:
+                  type: integer
+                  minimum: 0
+                  maximum: 120000
+      responses:
+        "200":
+          description: Feedback saved
+        "400":
+          description: Invalid feedback
+        "429":
+          description: Rate limited
+  /api/v1/health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: OK

@@ -1,0 +1,16 @@
+id: ideogram
+name: Ideogram
+url: https://ideogram.ai
+category: image
+deployment: saas
+pricing: freemium
+description: AI image generation tool known for prompt-based graphics, posters, logos, and text-heavy visuals.
+bestFor:
+  - posters and social graphics
+  - logo concepts and text in images
+  - fast visual ideation
+notFor:
+  - source-cited research
+  - no-code workflow automation
+tags: [image, design, posters, logos]
+

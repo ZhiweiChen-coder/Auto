@@ -1,0 +1,16 @@
+id: microsoft-copilot
+name: Microsoft Copilot
+url: https://copilot.microsoft.com
+category: general
+deployment: saas
+pricing: freemium
+description: General-purpose AI assistant integrated across Microsoft products for chat, search, documents, and productivity.
+bestFor:
+  - Microsoft 365 productivity help
+  - everyday AI chat and web answers
+  - drafting and summarizing work documents
+notFor:
+  - specialized cinematic video generation
+  - local offline model hosting
+tags: [assistant, productivity, microsoft, general]
+

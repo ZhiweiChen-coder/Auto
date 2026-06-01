@@ -1,0 +1,16 @@
+id: heygen
+name: HeyGen
+url: https://www.heygen.com
+category: video
+deployment: saas
+pricing: freemium
+description: AI video platform for avatar videos, translations, text-to-video, and marketing video creation.
+bestFor:
+  - avatar explainer videos
+  - translated or localized videos
+  - business and marketing video drafts
+notFor:
+  - coding help
+  - scientific research
+tags: [video, avatar, translation, marketing]
+

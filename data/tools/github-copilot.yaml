@@ -1,0 +1,15 @@
+id: github-copilot
+name: GitHub Copilot
+url: https://github.com/features/copilot
+category: coding
+deployment: hybrid
+pricing: freemium
+description: AI pair programmer integrated into VS Code, JetBrains, and GitHub with chat and code completion.
+bestFor:
+  - inline completions in existing IDEs
+  - teams already on GitHub
+  - incremental coding assistance
+notFor:
+  - standalone app generation from scratch
+  - users outside the Microsoft/GitHub ecosystem
+tags: [coding, completion, github, ide]

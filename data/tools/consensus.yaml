@@ -1,0 +1,16 @@
+id: consensus
+name: Consensus
+url: https://consensus.app
+category: search
+deployment: saas
+pricing: freemium
+description: Academic AI search engine that finds and summarizes evidence from scientific papers.
+bestFor:
+  - research questions needing scientific sources
+  - literature-backed summaries
+  - checking whether studies support a claim
+notFor:
+  - building websites
+  - making graphics or videos
+tags: [research, academic, citations, science]
+

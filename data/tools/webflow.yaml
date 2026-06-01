@@ -1,0 +1,16 @@
+id: webflow
+name: Webflow
+url: https://webflow.com
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Visual website builder with CMS, hosting, responsive design, and AI-assisted site creation.
+bestFor:
+  - high-quality marketing websites
+  - designers who want visual control
+  - CMS-backed business sites
+notFor:
+  - quick throwaway prototypes
+  - local private AI chat
+tags: [website-builder, no-code, cms, design]
+

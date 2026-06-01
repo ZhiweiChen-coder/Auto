@@ -1,0 +1,16 @@
+id: adobe-firefly
+name: Adobe Firefly
+url: https://www.adobe.com/products/firefly.html
+category: image
+deployment: saas
+pricing: freemium
+description: Adobe creative generative AI studio for text-to-image, image editing, effects, and production-friendly assets.
+bestFor:
+  - commercially minded image generation
+  - creative asset variations for marketing
+  - Adobe Creative Cloud workflows
+notFor:
+  - building web applications
+  - academic research with citations
+tags: [image, generative, adobe, creative]
+

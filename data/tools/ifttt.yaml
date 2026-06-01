@@ -1,0 +1,16 @@
+id: ifttt
+name: IFTTT
+url: https://ifttt.com
+category: automation
+deployment: saas
+pricing: freemium
+description: Simple automation platform for connecting apps, devices, and services with trigger-action workflows.
+bestFor:
+  - simple personal automations
+  - smart home and app connections
+  - lightweight no-code triggers
+notFor:
+  - complex business process automation
+  - generative media creation
+tags: [automation, no-code, integrations, personal-productivity]
+

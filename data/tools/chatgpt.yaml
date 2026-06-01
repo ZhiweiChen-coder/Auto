@@ -1,0 +1,15 @@
+id: chatgpt
+name: ChatGPT
+url: https://chat.openai.com
+category: general
+deployment: saas
+pricing: freemium
+description: OpenAI's general-purpose assistant with broad knowledge, plugins, and multimodal capabilities.
+bestFor:
+  - general Q&A and brainstorming
+  - quick drafts and explanations
+  - image understanding and generation (paid tiers)
+notFor:
+  - specialized real-time search (prefer Perplexity)
+  - production app deployment
+tags: [general, chat, openai, multimodal]

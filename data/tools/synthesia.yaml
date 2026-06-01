@@ -1,0 +1,16 @@
+id: synthesia
+name: Synthesia
+url: https://www.synthesia.io
+category: video
+deployment: saas
+pricing: paid
+description: AI video platform for creating professional avatar and training videos from text, documents, or slides.
+bestFor:
+  - corporate training videos
+  - avatar explainers
+  - turning scripts or decks into videos
+notFor:
+  - casual free video editing
+  - source-cited research
+tags: [video, avatar, training, business]
+

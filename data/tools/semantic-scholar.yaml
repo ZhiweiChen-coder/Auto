@@ -1,0 +1,16 @@
+id: semantic-scholar
+name: Semantic Scholar
+url: https://www.semanticscholar.org
+category: search
+deployment: saas
+pricing: free
+description: Free AI-powered research tool for discovering scientific literature, citations, authors, and related papers.
+bestFor:
+  - finding scientific papers
+  - citation trails and related work
+  - free academic discovery
+notFor:
+  - writing marketing copy
+  - creating videos
+tags: [research, academic, citations, free]
+

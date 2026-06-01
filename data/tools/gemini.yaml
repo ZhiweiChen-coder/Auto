@@ -1,0 +1,15 @@
+id: gemini
+name: Google Gemini
+url: https://gemini.google.com
+category: general
+deployment: saas
+pricing: freemium
+description: Google's multimodal AI assistant with web access, coding, and workspace integrations.
+bestFor:
+  - general Q&A with Google ecosystem
+  - multimodal prompts with images
+  - free-tier experimentation
+notFor:
+  - specialized citation-heavy research (use Perplexity)
+  - offline private inference
+tags: [general, google, multimodal, chat]

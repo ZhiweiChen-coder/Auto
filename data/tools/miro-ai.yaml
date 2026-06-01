@@ -1,0 +1,16 @@
+id: miro-ai
+name: Miro AI
+url: https://miro.com/ai/
+category: general
+deployment: saas
+pricing: freemium
+description: AI features inside Miro for brainstorming, diagramming, mind maps, workshops, and collaborative boards.
+bestFor:
+  - brainstorming and planning sessions
+  - visual collaboration and workshops
+  - mind maps and diagrams
+notFor:
+  - source-cited academic search
+  - local model inference
+tags: [whiteboard, collaboration, diagrams, brainstorming]
+

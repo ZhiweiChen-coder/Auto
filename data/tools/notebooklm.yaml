@@ -1,0 +1,14 @@
+id: notebooklm
+name: NotebookLM
+url: https://notebooklm.google.com
+category: writing
+deployment: saas
+pricing: freemium
+description: Google research assistant grounded in your uploaded documents, PDFs, and sources.
+bestFor:
+  - synthesizing your own PDFs and notes
+  - podcast-style audio overviews of documents
+notFor:
+  - live breaking news search
+  - shipping a web application
+tags: [writing, research, documents, google]

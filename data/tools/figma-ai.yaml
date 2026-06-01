@@ -1,0 +1,14 @@
+id: figma-ai
+name: Figma AI
+url: https://www.figma.com/ai
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Design tool features including AI-assisted layout, content, and prototyping inside Figma.
+bestFor:
+  - UI/UX design and high-fidelity mockups
+  - design systems and handoff to developers
+notFor:
+  - generating deployable production backend code alone
+  - CLI-based automation
+tags: [design, ui, prototyping, figma]
