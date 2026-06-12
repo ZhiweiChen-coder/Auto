@@ -9,7 +9,7 @@ import {
   publicError,
 } from "@/lib/api";
 import { COST, getGate, localGate } from "@/lib/credits/gate";
-import { getOrCreateUserId } from "@/lib/credits/identity";
+import { resolveCreditSubject } from "@/lib/credits/subject";
 import { getDataPaths } from "@/lib/paths";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
   try {
     gate = await getGate({ byok: Boolean(byok) });
     metered = gate !== localGate;
-    userId = metered ? await getOrCreateUserId() : null;
+    userId = metered ? await resolveCreditSubject() : null;
     if (metered && userId) {
       const { allowed } = await gate.check(userId, RESERVATION_COST);
       if (!allowed) {

@@ -1,7 +1,7 @@
 import { errorResponse, jsonResponse, preflightResponse } from "@/lib/api";
 import { isOpenMode } from "@/lib/config";
 import { supabaseConfigured } from "@/lib/credits/gate";
-import { getOrCreateUserId } from "@/lib/credits/identity";
+import { resolveCreditSubject } from "@/lib/credits/subject";
 import { CREDITS_PER_PURCHASE, getStripe, topUpEnabled } from "@/lib/stripe";
 
 /** Create a Stripe Checkout Session for a credit top-up and return its URL. */
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     return errorResponse("Credit backend is not configured.", 503);
   }
 
-  const userId = await getOrCreateUserId();
+  const userId = await resolveCreditSubject();
   const origin = process.env.NEXT_PUBLIC_APP_URL ?? new URL(request.url).origin;
 
   try {

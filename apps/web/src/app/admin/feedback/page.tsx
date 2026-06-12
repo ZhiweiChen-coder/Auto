@@ -17,7 +17,7 @@ function countByRating(records: FeedbackRecord[], rating: FeedbackRecord["rating
 
 export default async function FeedbackAdminPage() {
   if (!(await isAdminAuthenticated())) {
-    redirect("/?account=signin");
+    redirect("/admin/login");
   }
 
   const records = await readLocalFeedback(100);

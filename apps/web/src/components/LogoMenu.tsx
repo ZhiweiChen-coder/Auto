@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { signIn, signOut as googleSignOut, useSession } from "next-auth/react";
 import {
   useCallback,
   useEffect,
@@ -9,7 +10,7 @@ import {
   useState,
   type TouchEvent as ReactTouchEvent,
 } from "react";
-import { AdminLoginForm } from "./AdminLoginForm";
+import { clearRecentSearches, readRecentSearchCount } from "./RecentSearches";
 
 type MenuView = "menu" | "signin" | "register" | "settings";
 
@@ -100,6 +101,29 @@ function LogOutIcon() {
   );
 }
 
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
+      <path
+        d="M21.6 12.23c0-.66-.06-1.3-.17-1.9H12v3.6h5.38a4.6 4.6 0 01-2 3.02v2.5h3.23c1.89-1.74 2.99-4.3 2.99-7.22z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 22c2.7 0 4.96-.9 6.62-2.42l-3.23-2.5c-.9.6-2.05.95-3.39.95-2.6 0-4.8-1.76-5.59-4.12H3.07v2.59A10 10 0 0012 22z"
+        fill="#34A853"
+      />
+      <path
+        d="M6.41 13.91a6 6 0 010-3.82V7.5H3.07a10 10 0 000 9l3.34-2.59z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M12 6.58c1.47 0 2.78.5 3.82 1.49l2.85-2.85A10 10 0 0012 2 10 10 0 003.07 7.5l3.34 2.59C7.2 8.33 9.4 6.58 12 6.58z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
+
 function BackIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -151,6 +175,8 @@ export function LogoMenu() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { data: googleSession } = useSession();
+  const googleUser = googleSession?.user;
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -163,6 +189,7 @@ export function LogoMenu() {
     configured: false,
   });
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [recentCount, setRecentCount] = useState(0);
 
   const clearAccountQuery = useCallback(() => {
     if (!searchParams.has("account")) return;
@@ -204,6 +231,11 @@ export function LogoMenu() {
       setView(account);
     }
   }, [searchParams]);
+
+  // Recent-search count is browser-local, so read it when the settings view opens.
+  useEffect(() => {
+    if (view === "settings") setRecentCount(readRecentSearchCount());
+  }, [view]);
 
   useEffect(() => {
     if (!open) return;
@@ -319,12 +351,6 @@ export function LogoMenu() {
 
   function openView(nextView: MenuView) {
     setView(nextView);
-  }
-
-  function handleLoginSuccess() {
-    closeMenu();
-    router.push("/admin/feedback");
-    router.refresh();
   }
 
   const panelTitle =
@@ -509,16 +535,52 @@ export function LogoMenu() {
 
                 {view === "signin" && (
                   <div className="px-2 py-1">
-                    <p className="px-1 text-xs leading-5 text-canvas-muted">
-                      Sign in with your admin token to access feedback and catalog
-                      tuning.
-                    </p>
-                    {session.configured ? (
-                      <AdminLoginForm compact onSuccess={handleLoginSuccess} />
-                    ) : (
-                      <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs text-amber-800 ring-1 ring-amber-100">
-                        Set <code>ADMIN_TOKEN</code> to enable admin login.
+                    {googleUser ? (
+                      <div className="rounded-xl border border-canvas-border bg-canvas-base/60 p-3">
+                        <div className="flex items-center gap-3">
+                          {googleUser.image ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={googleUser.image}
+                              alt=""
+                              className="h-9 w-9 rounded-full"
+                            />
+                          ) : (
+                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas-brandLight text-canvas-brand">
+                              <GoogleIcon />
+                            </span>
+                          )}
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold text-canvas-text">
+                              {googleUser.name ?? "Signed in"}
+                            </p>
+                            <p className="truncate text-xs text-canvas-muted">
+                              {googleUser.email}
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => googleSignOut()}
+                          className="mt-3 w-full rounded-full bg-canvas-base px-4 py-2 text-xs font-semibold text-canvas-muted transition-colors hover:text-canvas-text"
+                        >
+                          Sign out of Google
+                        </button>
                       </div>
+                    ) : (
+                      <>
+                        <p className="mb-3 px-1 text-xs leading-5 text-canvas-muted">
+                          Sign in to keep your credits attached to your account.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => signIn("google")}
+                          className="flex w-full items-center justify-center gap-2.5 rounded-full border border-canvas-border bg-canvas-white px-4 py-2.5 text-sm font-semibold text-canvas-text shadow-soft transition-colors hover:bg-canvas-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas-brand/30"
+                        >
+                          <GoogleIcon />
+                          Continue with Google
+                        </button>
+                      </>
                     )}
                   </div>
                 )}
@@ -526,46 +588,99 @@ export function LogoMenu() {
                 {view === "register" && (
                   <div className="space-y-4 px-2 py-1">
                     <p className="text-xs leading-5 text-canvas-muted">
-                      Public registration is not available yet. Auto is currently
-                      invite-only for workspace access.
+                      Create your account with Google — no separate password to
+                      manage. Your credits stay attached to your account.
                     </p>
                     <button
                       type="button"
-                      onClick={() => openView("signin")}
-                      className="w-full rounded-full bg-canvas-brand px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-canvas-brandHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas-brand/30"
+                      onClick={() => signIn("google")}
+                      className="flex w-full items-center justify-center gap-2.5 rounded-full border border-canvas-border bg-canvas-white px-4 py-2.5 text-sm font-semibold text-canvas-text shadow-soft transition-colors hover:bg-canvas-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas-brand/30"
                     >
-                      Sign in instead
+                      <GoogleIcon />
+                      Continue with Google
                     </button>
                   </div>
                 )}
 
                 {view === "settings" && (
-                  <div className="space-y-1 px-1 py-1">
-                    <Link
-                      href="/docs"
-                      onClick={closeMenu}
-                      className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-canvas-text transition-colors hover:bg-canvas-base focus-visible:bg-canvas-base focus-visible:outline-none"
-                    >
-                      API documentation
-                    </Link>
-                    <a
-                      href="https://github.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={closeMenu}
-                      className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-canvas-text transition-colors hover:bg-canvas-base focus-visible:bg-canvas-base focus-visible:outline-none"
-                    >
-                      GitHub
-                    </a>
-                    {session.authenticated ? (
-                      <Link
-                        href="/admin/feedback"
-                        onClick={closeMenu}
-                        className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-canvas-text transition-colors hover:bg-canvas-base focus-visible:bg-canvas-base focus-visible:outline-none"
-                      >
-                        Feedback admin
-                      </Link>
-                    ) : null}
+                  <div className="space-y-5 px-2 py-1">
+                    <section>
+                      <p className="px-1 text-[10px] font-semibold uppercase tracking-wide text-canvas-muted">
+                        Account
+                      </p>
+                      {googleUser ? (
+                        <div className="mt-2 rounded-xl border border-canvas-border bg-canvas-base/60 p-3">
+                          <div className="flex items-center gap-3">
+                            {googleUser.image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={googleUser.image}
+                                alt=""
+                                className="h-9 w-9 rounded-full"
+                              />
+                            ) : (
+                              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-canvas-brandLight text-canvas-brand">
+                                <GoogleIcon />
+                              </span>
+                            )}
+                            <div className="min-w-0">
+                              <p className="truncate text-sm font-semibold text-canvas-text">
+                                {googleUser.name ?? "Signed in"}
+                              </p>
+                              <p className="truncate text-xs text-canvas-muted">
+                                {googleUser.email}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => googleSignOut()}
+                            className="mt-3 w-full rounded-full bg-canvas-base px-4 py-2 text-xs font-semibold text-canvas-muted transition-colors hover:text-canvas-text"
+                          >
+                            Sign out
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => signIn("google")}
+                          className="mt-2 flex w-full items-center justify-center gap-2.5 rounded-full border border-canvas-border bg-canvas-white px-4 py-2.5 text-sm font-semibold text-canvas-text shadow-soft transition-colors hover:bg-canvas-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas-brand/30"
+                        >
+                          <GoogleIcon />
+                          Continue with Google
+                        </button>
+                      )}
+                    </section>
+
+                    <section>
+                      <p className="px-1 text-[10px] font-semibold uppercase tracking-wide text-canvas-muted">
+                        Privacy
+                      </p>
+                      <div className="mt-2 flex items-center justify-between gap-3 rounded-xl border border-canvas-border px-3 py-2.5">
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-canvas-text">
+                            Recent searches
+                          </p>
+                          <p className="text-xs text-canvas-muted">
+                            {recentCount > 0
+                              ? `${recentCount} stored in this browser`
+                              : "Nothing stored"}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          disabled={recentCount === 0}
+                          onClick={() => {
+                            clearRecentSearches();
+                            setRecentCount(0);
+                            router.refresh();
+                          }}
+                          className="shrink-0 rounded-full bg-canvas-base px-3 py-1.5 text-xs font-semibold text-canvas-muted transition-colors hover:text-canvas-text disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </section>
                   </div>
                 )}
             </div>

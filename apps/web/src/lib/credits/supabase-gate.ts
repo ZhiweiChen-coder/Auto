@@ -59,6 +59,22 @@ export const supabaseGate: CreditGate = {
   },
 };
 
+/**
+ * Move an anonymous credit balance into an account on sign-in (see
+ * merge_credits in db/credits.sql). Best-effort: a failure here must not block
+ * login, so callers log and continue rather than throw.
+ */
+export async function mergeCredits(from: string, to: string): Promise<void> {
+  if (!from || from === to) return;
+  const client = await db();
+  const { error } = await client.rpc("merge_credits", {
+    p_from: from,
+    p_to: to,
+    p_grant: FREE_CREDITS,
+  });
+  if (error) throw new Error(`merge_credits failed: ${error.message}`);
+}
+
 /** Add credits to a user's balance (used by the Stripe top-up webhook). */
 export async function addCredits(userId: string, amount: number): Promise<void> {
   const client = await db();

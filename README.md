@@ -1,12 +1,48 @@
 # Auto — Open-Source AI Tool Hunter
 
-**Auto does not answer your question.** It tells you which existing AI product to use.
+> **Auto does not answer your question. It tells you which existing AI product to use.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
+[![Web CI](https://github.com/ZhiweiChen-coder/Auto/actions/workflows/web-ci.yml/badge.svg)](https://github.com/ZhiweiChen-coder/Auto/actions/workflows/web-ci.yml)
+[![Validate Catalog](https://github.com/ZhiweiChen-coder/Auto/actions/workflows/validate-catalog.yml/badge.svg)](https://github.com/ZhiweiChen-coder/Auto/actions/workflows/validate-catalog.yml)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+<p align="center">
+  <img src="assets/home.png" alt="Auto — describe what you want to accomplish and get the right AI tool" width="800">
+</p>
+
+Unlike generic chatbots or self-hosted agents, Auto hunts down the best **ready-made tool** for your **task** from a curated, community-editable catalog.
 
 - Need live web research with citations? → [Perplexity](https://www.perplexity.ai)
 - Need a landing page today? → [Lovable](https://lovable.dev), [v0](https://v0.dev), or [Bolt](https://bolt.new)
 - Need to refactor a large codebase? → [Cursor](https://cursor.com)
 
-Unlike generic chatbots or self-hosted agents, Auto hunts down the best **ready-made tool** for your **task** from a curated, community-editable catalog.
+## Table of contents
+
+- [Features](#features)
+- [How it works](#how-it-works)
+- [Quick start](#quick-start)
+- [Environment variables](#environment-variables)
+- [Public API](#public-api)
+- [Project structure](#project-structure)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- **Hybrid routing** — embeddings shortlist + LLM rank (grounded to catalog only)
+- **Clarification** — vague or ambiguous queries get follow-up questions instead of weak picks
+- **Recent searches** — stored locally in your browser
+- **Feedback loop** — quick result ratings saved for recommendation tuning
+- **Shareable results** — copy link with query preserved
+- **Browse + search** — filter the full catalog
+- **Public API** — see `/docs` in the app or [openapi.yaml](openapi.yaml)
+
+<p align="center">
+  <img src="assets/catalog.png" alt="Browse the curated catalog of AI tools by category" width="800">
+</p>
 
 ## How it works
 
@@ -51,7 +87,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Deployment notes live in [docs/deployment.md](docs/deployment.md).
 
-### Environment variables
+## Environment variables
 
 Create **`apps/web/.env.local`** (or repo root `.env.local`) with your OpenAI key:
 
@@ -72,8 +108,10 @@ Restart the dev server after saving.
 | `APP_MODE` | Default: `local`; set `open` for hosted shared-key + credits |
 | `NEXT_PUBLIC_APP_URL` | Public app URL for checkout redirects and docs examples |
 | `ALLOWED_ORIGIN` | Optional CORS origin for hosted open mode |
-| `ADMIN_TOKEN` | Optional — enables `/admin/login` and protects `/admin/feedback` |
-| `SESSION_SECRET` | Recommended — signs admin and anonymous credit cookies |
+| `ADMIN_TOKEN` | Sign-in secret for the admin area. Set it, then paste the same value into the **Sign in** form to reach `/admin/feedback`. Unset = admin login is disabled (login returns `403`). Generate one with `openssl rand -base64 24`. |
+| `SESSION_SECRET` | Signs admin and anonymous credit cookies. Falls back to a value derived from `ADMIN_TOKEN` if unset, but set a dedicated long random secret (`openssl rand -base64 32`) in production. Changing it invalidates existing sessions. |
+| `AUTH_SECRET` | Required for Google sign-in — signs Auth.js JWT sessions. `openssl rand -base64 32`. |
+| `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | Optional — enable **Continue with Google**. From a Google Cloud OAuth client (redirect URI `<app-url>/api/auth/callback/google`). Unset = the button shows but sign-in won't complete. In `open` mode, an anon user's credits merge into their account on first sign-in. |
 | `FEEDBACK_STORE` | Default: `file`; use `webhook` for deployed/serverless feedback |
 | `FEEDBACK_WEBHOOK_URL` | Optional — receives feedback records in production |
 | `FEEDBACK_WEBHOOK_SECRET` | Optional bearer token for the feedback webhook |
@@ -143,26 +181,16 @@ data/feedback.jsonl Local feedback log (ignored)
 scripts/            index-catalog, validate-catalog
 ```
 
+## Roadmap
+
+- [ ] MCP server for agent integrations
+- [ ] Production embedding index in CI
+- [ ] Community voting on tool entries
+
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to add or edit tools in `data/tools/`.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) to add or edit tools in `data/tools/`.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
-
-## Features
-
-- **Hybrid routing** — embeddings shortlist + LLM rank (grounded to catalog only)
-- **Clarification** — vague or ambiguous queries get follow-up questions instead of weak picks
-- **Recent searches** — stored locally in your browser
-- **Feedback loop** — quick result ratings saved for recommendation tuning
-- **Shareable results** — copy link with query preserved
-- **Browse + search** — filter the full catalog
-- **Public API** — see `/docs` in the app or [openapi.yaml](openapi.yaml)
-
-## Roadmap
-
-- MCP server for agent integrations
-- Production embedding index in CI
-- Community voting on tool entries
+[MIT](LICENSE) © Auto contributors

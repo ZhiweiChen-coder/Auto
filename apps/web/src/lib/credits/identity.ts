@@ -57,3 +57,12 @@ export async function readUserId(): Promise<string | null> {
   const store = await cookies();
   return parseSigned(store.get(COOKIE_NAME)?.value);
 }
+
+/**
+ * Drop the anonymous id cookie. Called after a sign-in merges the anon credit
+ * balance into the account so the anon id can't be reused or double-counted.
+ */
+export async function clearAnonCookie(): Promise<void> {
+  const store = await cookies();
+  store.delete(COOKIE_NAME);
+}

@@ -1,6 +1,6 @@
 import { errorResponse, jsonResponse, preflightResponse, publicError } from "@/lib/api";
 import { getGate, localGate } from "@/lib/credits/gate";
-import { readUserId } from "@/lib/credits/identity";
+import { readCreditSubject } from "@/lib/credits/subject";
 import { topUpEnabled } from "@/lib/stripe";
 
 /** Current credit balance for display. Returns metered:false when unmetered. */
@@ -10,7 +10,7 @@ export async function GET() {
     if (gate === localGate) {
       return jsonResponse({ metered: false });
     }
-    const userId = await readUserId();
+    const userId = await readCreditSubject();
     const remaining = userId
       ? await gate.remaining(userId)
       : Number(process.env.FREE_CREDITS ?? 30);

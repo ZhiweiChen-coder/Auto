@@ -57,3 +57,22 @@ export function saveRecentSearch(query: string) {
     /* ignore */
   }
 }
+
+/** Read how many recent searches are stored (0 when none/unavailable). */
+export function readRecentSearchCount(): number {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as string[]).length : 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Clear all locally stored recent searches. */
+export function clearRecentSearches() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+}

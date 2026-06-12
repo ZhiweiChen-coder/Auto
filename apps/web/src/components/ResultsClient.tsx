@@ -192,6 +192,135 @@ function LiveChain({
   );
 }
 
+const CATEGORY_LABELS: Record<string, string> = {
+  search: "Search",
+  coding: "Coding",
+  "app-builder": "App builders",
+  writing: "Writing",
+  image: "Image",
+  video: "Video",
+  automation: "Automation",
+  local: "Local",
+  general: "General",
+};
+
+// A quiet braille spinner — the only motion on the active line.
+const SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+// A live "thinking" log in the spirit of Claude Code's cooking state: a calm,
+// monospace narrative that streams the reasoning chain top-to-bottom and shows
+// which catalog categories are being searched, so the wait reads as real work.
+function ThinkingStream({
+  phase,
+  tools,
+  selectedName,
+  stage,
+  elapsedMs,
+}: {
+  phase: RequestPhase;
+  tools: Tool[];
+  selectedName?: string;
+  stage?: ProgressStage;
+  elapsedMs: number;
+}) {
+  const currentIndex =
+    phase === "ready"
+      ? STAGE_ORDER.length
+      : STAGE_ORDER.indexOf(stage ?? "understand");
+  const frame = SPINNER[Math.floor(elapsedMs / 90) % SPINNER.length];
+
+  // Distinct catalog categories, busiest first — the search space we scan.
+  const categories = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const tool of tools) {
+      counts.set(tool.category, (counts.get(tool.category) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  }, [tools]);
+
+  const lines = [
+    { stage: "understand", text: "Parsing intent from your prompt" },
+    {
+      stage: "search",
+      text: `Scanning ${tools.length} tools across ${categories.length} categories`,
+    },
+    {
+      stage: "compare",
+      text: selectedName
+        ? `Scoring fit — leaning toward ${selectedName}`
+        : "Scoring candidates on fit",
+    },
+    { stage: "recommend", text: "Drafting steps and alternatives" },
+  ] as const;
+
+  return (
+    <section className="rounded-3xl border border-canvas-border bg-canvas-white p-6 shadow-soft sm:p-7">
+      <ul className="space-y-3 font-mono text-sm leading-relaxed">
+        {lines.map((line, index) => {
+          const state =
+            phase === "ready" || index < currentIndex
+              ? "done"
+              : index === currentIndex
+                ? "active"
+                : "pending";
+
+          return (
+            <li
+              key={line.stage}
+              className={state === "pending" ? "opacity-35" : "think-in"}
+              style={{ animationDelay: `${index * 70}ms` }}
+            >
+              <div className="flex items-start gap-3">
+                <span
+                  className={`mt-px w-4 shrink-0 text-center ${
+                    state === "active"
+                      ? "text-canvas-brand"
+                      : state === "done"
+                        ? "text-canvas-muted"
+                        : "text-canvas-subtle"
+                  }`}
+                  aria-hidden
+                >
+                  {state === "done" ? "✓" : state === "active" ? frame : "·"}
+                </span>
+                <span
+                  className={
+                    state === "active"
+                      ? "text-canvas-text"
+                      : "text-canvas-muted"
+                  }
+                >
+                  {line.text}
+                  {state === "active" && (
+                    <span className="think-caret ml-0.5 text-canvas-brand">
+                      ▍
+                    </span>
+                  )}
+                </span>
+              </div>
+
+              {line.stage === "search" && currentIndex >= 1 && (
+                <div className="ml-7 mt-2.5 flex flex-wrap gap-1.5">
+                  {categories.map(([category, count], catIndex) => (
+                    <span
+                      key={category}
+                      className="think-in rounded-md border border-canvas-border bg-canvas-base px-2 py-0.5 text-xs text-canvas-muted"
+                      style={{ animationDelay: `${catIndex * 45}ms` }}
+                    >
+                      {CATEGORY_LABELS[category] ?? category}{" "}
+                      <span className="text-canvas-subtle">{count}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
   const [phase, setPhase] = useState<RequestPhase>("loading");
   const [stage, setStage] = useState<ProgressStage>();
@@ -340,12 +469,13 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
         />
 
         {phase === "loading" && (
-          <div className="route-shimmer rounded-3xl border border-canvas-border bg-canvas-white p-6">
-            <div className="h-4 w-24 rounded-full bg-canvas-base" />
-            <div className="mt-5 h-8 w-52 rounded-full bg-canvas-base" />
-            <div className="mt-4 h-3 w-full max-w-lg rounded-full bg-canvas-base" />
-            <div className="mt-3 h-3 w-2/3 rounded-full bg-canvas-base" />
-          </div>
+          <ThinkingStream
+            phase={phase}
+            tools={tools}
+            selectedName={primary?.name}
+            stage={stage}
+            elapsedMs={elapsedMs}
+          />
         )}
 
         {phase === "error" && (

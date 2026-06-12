@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import { AppShell } from "@/components/AppShell";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -35,7 +36,9 @@ export default function RootLayout({
         className={`${sans.variable} ${serif.variable} font-sans`}
         suppressHydrationWarning
       >
-        <AppShell>{children}</AppShell>
+        <Providers>
+          <AppShell>{children}</AppShell>
+        </Providers>
       </body>
     </html>
   );

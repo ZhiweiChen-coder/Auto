@@ -442,6 +442,41 @@ body {
   animation: progress-flow 2.2s linear infinite;
 }
 
+/* --- Loading: a calm "thinking" log (Claude Code "cooking" style) ------- */
+
+/* Braille spinner — one quiet glyph that cycles, no glow, no halo. */
+@keyframes think-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Each reasoning line and tag fades up as it streams in, so the chain of
+   thought assembles top-to-bottom instead of appearing all at once. */
+@keyframes think-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.think-in {
+  animation: think-in var(--dur-base) var(--ease-out-expo) both;
+}
+
+/* The active line carries a soft caret that blinks like a terminal cursor. */
+@keyframes think-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.think-caret {
+  animation: think-blink 1.1s steps(1) infinite;
+}
+
 .hero-title {
   color: #1d1d1f;
   /* Editorial serif display — give descenders room and tighten the optical
