@@ -2,7 +2,7 @@
   "name": "auto",
   "private": true,
   "version": "0.1.0",
-  "description": "Open-source AI tool recommender — routes your task to the best existing product",
+  "description": "Open-source AI tool hunter — finds the best existing product for your task",
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm --filter @auto/web dev",

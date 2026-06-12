@@ -12,7 +12,15 @@
 }
 
 body {
-  background: #fcfcfb;
+  /* A soft blue→purple wash pinned to the top of the viewport: blue glow on
+     the left, brand purple on the right, blending across the top and fading
+     down into the warm-white canvas. */
+  background:
+    radial-gradient(60% 300px at 28% 0%, rgba(91, 141, 239, 0.14), transparent 70%),
+    radial-gradient(60% 300px at 72% 0%, rgba(139, 61, 255, 0.14), transparent 70%),
+    #fcfcfb;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #1d1d1f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -413,6 +421,27 @@ body {
 }
 
 /* Hero headline — near-black with a hint of brand at the tail for depth. */
+/* Recommendation progress bar — a blue→purple gradient that flows while the
+   route is being computed, for a premium "thinking" feel. */
+@keyframes progress-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+.progress-fill {
+  background: linear-gradient(
+    90deg,
+    #5b8def 0%,
+    #8b3dff 50%,
+    #5b8def 100%
+  );
+  background-size: 200% 100%;
+  animation: progress-flow 2.2s linear infinite;
+}
+
 .hero-title {
   color: #1d1d1f;
   /* Editorial serif display — give descenders room and tighten the optical

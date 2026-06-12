@@ -155,7 +155,7 @@ function LiveChain({
       </div>
       <div className="mt-4 h-2 overflow-hidden rounded-full bg-canvas-base">
         <span
-          className="block h-full rounded-full bg-canvas-brand transition-all duration-300"
+          className="progress-fill block h-full rounded-full transition-all duration-300"
           style={{ width: progressWidth }}
         />
       </div>

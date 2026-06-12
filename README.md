@@ -1,4 +1,4 @@
-# Auto — Open-Source AI Tool Recommender
+# Auto — Open-Source AI Tool Hunter
 
 **Auto does not answer your question.** It tells you which existing AI product to use.
 
@@ -6,7 +6,7 @@
 - Need a landing page today? → [Lovable](https://lovable.dev), [v0](https://v0.dev), or [Bolt](https://bolt.new)
 - Need to refactor a large codebase? → [Cursor](https://cursor.com)
 
-Unlike generic chatbots or self-hosted agents, Auto routes your **task** to the best **ready-made tool** from a curated, community-editable catalog.
+Unlike generic chatbots or self-hosted agents, Auto hunts down the best **ready-made tool** for your **task** from a curated, community-editable catalog.
 
 ## How it works
 
