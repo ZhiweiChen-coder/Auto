@@ -417,6 +417,10 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* text-6xl ships line-height:1, which clips gradient-clipped descenders
+     (the "g" in "right"). Loosen the line box and pad the bottom edge. */
+  line-height: 1.1;
+  padding-bottom: 0.08em;
 }
 
 /* Eyebrow status dot — a slow, quiet pulse that signals "live". */
