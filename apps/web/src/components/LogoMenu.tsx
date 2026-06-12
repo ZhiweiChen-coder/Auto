@@ -456,8 +456,12 @@ export function LogoMenu() {
                 ) : null}
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-canvas-text">{panelTitle}</p>
-                  {session.authenticated && view === "menu" ? (
+                  {view === "menu" && session.authenticated ? (
                     <p className="text-xs font-semibold text-emerald-600">Signed in as admin</p>
+                  ) : view === "menu" && googleUser ? (
+                    <p className="truncate text-xs font-semibold text-emerald-600">
+                      {googleUser.email ?? "Signed in"}
+                    </p>
                   ) : null}
                 </div>
               </div>
@@ -504,6 +508,18 @@ export function LogoMenu() {
                           {isSigningOut ? "Signing out..." : "Sign out"}
                         </button>
                       </>
+                    ) : googleUser ? (
+                      <button
+                        type="button"
+                        role="menuitem"
+                        onClick={() => googleSignOut()}
+                        className={`${menuItemClassName()} text-red-700 hover:bg-red-50 focus-visible:bg-red-50`}
+                      >
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 text-red-600">
+                          <LogOutIcon />
+                        </span>
+                        Sign out
+                      </button>
                     ) : (
                       <>
                         <button
