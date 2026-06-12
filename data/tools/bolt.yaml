@@ -12,3 +12,4 @@ notFor:
   - enterprise codebases with strict compliance
   - long-term maintenance of complex systems
 tags: [app-builder, full-stack, browser, prototype]
+outputTypes: [app, website]

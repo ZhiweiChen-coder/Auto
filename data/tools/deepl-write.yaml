@@ -13,4 +13,4 @@ notFor:
   - generating videos
   - building web apps
 tags: [writing, translation, editing, tone]
-
+outputTypes: [document]

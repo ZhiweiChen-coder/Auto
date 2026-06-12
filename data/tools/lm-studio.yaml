@@ -12,3 +12,4 @@ notFor:
   - team SaaS deployment
   - live web research
 tags: [local, llm, desktop, privacy]
+outputTypes: [document]

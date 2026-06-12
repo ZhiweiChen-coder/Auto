@@ -12,3 +12,4 @@ notFor:
   - generating raw video from text alone
   - software development
 tags: [video, audio, podcast, editing]
+outputTypes: [video, audio]

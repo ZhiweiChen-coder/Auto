@@ -13,4 +13,4 @@ notFor:
   - image creation
   - web app coding
 tags: [meetings, transcription, notes, productivity]
-
+outputTypes: [document]

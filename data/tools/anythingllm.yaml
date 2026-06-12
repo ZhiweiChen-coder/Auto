@@ -13,4 +13,4 @@ notFor:
   - quick social graphics
   - polished video generation
 tags: [local, documents, rag, private]
-
+outputTypes: [document]

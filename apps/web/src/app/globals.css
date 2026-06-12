@@ -4,6 +4,11 @@
 
 :root {
   color-scheme: light;
+  /* Motion system — one signature easing, three duration steps. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms; /* micro-interactions: hover, press */
+  --dur-base: 240ms; /* state changes */
+  --dur-slow: 420ms; /* entrances */
 }
 
 body {
@@ -29,6 +34,38 @@ body {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rise-blur {
+  from {
+    filter: blur(12px);
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-panel {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes route-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -124,6 +161,49 @@ body {
   }
 }
 
+@keyframes menu-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.menu-sheet-backdrop {
+  animation: menu-backdrop-in 200ms ease-out both;
+}
+
+.menu-sheet-panel {
+  animation: menu-sheet-up 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (min-width: 640px) {
+  .menu-sheet-panel {
+    animation: menu-dropdown-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
 .home-stage {
   position: relative;
   overflow: hidden;
@@ -142,12 +222,55 @@ body {
 }
 
 .home-enter {
-  animation: home-enter 520ms ease-out both;
+  animation: home-enter 520ms var(--ease-out-expo) both;
   position: relative;
 }
 
+/* Shared micro-interactions: lift on hover, settle on press. Animate only
+   transform / shadow / color so they stay on the GPU and never reflow. */
+.lift {
+  transition:
+    transform var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) var(--ease-out-expo),
+    background-color var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
+}
+.lift:hover {
+  transform: translateY(-2px);
+}
+.lift:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.press {
+  transition:
+    transform var(--dur-fast) var(--ease-out-expo),
+    background-color var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+.commercial-enter {
+  animation: rise-blur 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.commercial-enter-delayed {
+  animation: rise-blur 780ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+.floating-panel {
+  animation: float-panel 5.5s ease-in-out infinite;
+}
+
+.route-fill {
+  animation: route-fill 900ms cubic-bezier(0.16, 1, 0.3, 1) 360ms both;
+  transform-origin: left;
+}
+
 .loading-panel {
-  animation: loading-panel 420ms ease-out both;
+  animation: loading-panel var(--dur-slow) var(--ease-out-expo) both;
 }
 
 .loading-row {
@@ -175,15 +298,54 @@ body {
 }
 
 .result-enter {
-  animation: result-enter 420ms ease-out both;
+  animation: result-enter var(--dur-slow) var(--ease-out-expo) both;
 }
 
 .result-chain {
-  animation: result-enter 360ms ease-out both;
+  animation: result-enter 360ms var(--ease-out-expo) both;
 }
 
 .chain-node {
-  animation: chain-node 360ms ease-out both;
+  animation: chain-node 360ms var(--ease-out-expo) both;
+}
+
+/* --- Workflow chain assembly (B) ---------------------------------------- */
+@keyframes grow-down {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Each step fades up in sequence; delay is set inline per index. */
+.workflow-step {
+  animation: chain-node var(--dur-slow) var(--ease-out-expo) both;
+}
+
+/* The connector between steps "draws" downward as the next step arrives. */
+.workflow-connector {
+  transform-origin: top;
+  animation: grow-down var(--dur-base) var(--ease-out-expo) both;
+}
+
+/* The chosen tool card settles in just after its step. */
+.workflow-tool {
+  animation: settle var(--dur-base) var(--ease-out-expo) both;
 }
 
 .chain-node:has(+ .chain-node)::after {
@@ -221,4 +383,77 @@ body {
   inset: 0;
   position: absolute;
   transform: skewX(-12deg);
+}
+
+/* --- Homepage refinements ---------------------------------------------- */
+
+/* Each top-level block rises + de-blurs in sequence for a premium cascade,
+   rather than the whole panel arriving as one slab. */
+.home-stagger > * {
+  animation: rise-blur 720ms var(--ease-out-expo) both;
+}
+.home-stagger > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.home-stagger > *:nth-child(2) {
+  animation-delay: 130ms;
+}
+.home-stagger > *:nth-child(3) {
+  animation-delay: 220ms;
+}
+.home-stagger > *:nth-child(4) {
+  animation-delay: 310ms;
+}
+.home-stagger > *:nth-child(5) {
+  animation-delay: 400ms;
+}
+.home-stagger > *:nth-child(6) {
+  animation-delay: 490ms;
+}
+
+/* Hero headline — near-black with a hint of brand at the tail for depth. */
+.hero-title {
+  background: linear-gradient(116deg, #1d1d1f 0%, #1d1d1f 52%, #6d3df0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Eyebrow status dot — a slow, quiet pulse that signals "live". */
+@keyframes eyebrow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.eyebrow-dot {
+  animation: eyebrow-pulse 2.6s ease-in-out infinite;
+}
+
+/* Hero search field — soft brand-tinted ring + glow when focused. */
+.hero-search {
+  transition:
+    box-shadow var(--dur-base) var(--ease-out-expo),
+    transform var(--dur-base) var(--ease-out-expo);
+}
+.hero-search:focus-within {
+  box-shadow:
+    0 0 0 1px rgba(109, 61, 240, 0.4),
+    0 18px 50px rgba(91, 58, 166, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
 }

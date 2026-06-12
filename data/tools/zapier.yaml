@@ -12,3 +12,4 @@ notFor:
   - complex self-hosted pipelines
   - deep code refactoring
 tags: [automation, no-code, integrations, saas]
+outputTypes: [automation]

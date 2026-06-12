@@ -13,4 +13,4 @@ notFor:
   - casual free writing tasks
   - local private LLM use
 tags: [writing, marketing, brand, campaigns]
-
+outputTypes: [document]

@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ByokKeyPanel } from "./ByokKeyPanel";
+import { CreditsBadge } from "./CreditsBadge";
 import { RecentSearches } from "./RecentSearches";
 import { SearchForm } from "./SearchForm";
 import { TaskExamples } from "./TaskExamples";
@@ -12,8 +14,12 @@ export function HomeClient() {
 
   return (
     <>
+      <div className="mb-3 flex justify-end">
+        <CreditsBadge />
+      </div>
       <SearchForm variant="hero" autoFocus />
       <TaskExamples onPick={openResults} />
+      <ByokKeyPanel />
       <RecentSearches onPick={openResults} />
     </>
   );

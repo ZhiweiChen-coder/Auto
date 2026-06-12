@@ -1,6 +1,6 @@
 import { getToolById } from "@auto/catalog";
 import { getCatalogTools } from "@/lib/catalog";
-import { errorResponse, jsonResponse } from "@/lib/api";
+import { errorResponse, jsonResponse, preflightResponse } from "@/lib/api";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -15,5 +15,5 @@ export async function GET(_request: Request, { params }: Params) {
 }
 
 export async function OPTIONS() {
-  return jsonResponse({}, { status: 204 });
+  return preflightResponse();
 }

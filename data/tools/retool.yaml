@@ -1,0 +1,17 @@
+id: retool
+name: Retool
+url: https://retool.com
+category: app-builder
+deployment: saas
+pricing: freemium
+description: Low-code platform for building internal tools and admin panels fast, with AI features to generate apps, queries, and workflows.
+bestFor:
+  - internal dashboards and admin tools
+  - CRUD apps over your databases and APIs
+  - teams replacing spreadsheets with real apps
+notFor:
+  - public-facing marketing websites
+  - users wanting zero data/SQL knowledge
+tags: [app-builder, low-code, internal-tools, dashboard]
+difficulty: medium
+outputTypes: [app]

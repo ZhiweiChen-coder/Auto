@@ -123,6 +123,19 @@ export function validateAgainstShortlist(
   output: LlmRankOutput,
   shortlistIds: Set<string>,
 ): LlmRankOutput {
+  // Repair casing slips: the LLM sometimes returns e.g. "deepL-write" for the
+  // catalog id "deepl-write". Map case-insensitively back to the canonical id
+  // before validating so a harmless capitalization doesn't 500 the request.
+  const canonical = new Map(
+    [...shortlistIds].map((id) => [id.toLowerCase(), id]),
+  );
+  const fix = (id: string) => canonical.get(id.toLowerCase()) ?? id;
+  output.primary.toolId = fix(output.primary.toolId);
+  for (const alt of output.alternatives) alt.toolId = fix(alt.toolId);
+  for (const route of output.routeCards) {
+    route.toolIds = route.toolIds.map(fix);
+  }
+
   const routeIds = output.routeCards.flatMap((route) => route.toolIds);
   const ids = [
     output.primary.toolId,

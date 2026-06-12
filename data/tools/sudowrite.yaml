@@ -1,0 +1,16 @@
+id: sudowrite
+name: Sudowrite
+url: https://www.sudowrite.com
+category: writing
+deployment: saas
+pricing: paid
+description: AI writing tool built for fiction authors, helping brainstorm, expand scenes, describe, and rewrite while keeping your voice.
+bestFor:
+  - drafting and expanding fiction
+  - brainstorming plot and characters
+  - beating writer's block on long stories
+notFor:
+  - technical or business documents
+  - factual research
+tags: [writing, fiction, storytelling, creative]
+outputTypes: [document]

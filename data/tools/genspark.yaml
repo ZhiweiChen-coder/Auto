@@ -1,0 +1,16 @@
+id: genspark
+name: Genspark
+url: https://www.genspark.ai
+category: search
+deployment: saas
+pricing: freemium
+description: Agentic AI search that generates custom "Sparkpages" summarizing topics and can run multi-step research and tasks for you.
+bestFor:
+  - synthesized research overviews on a topic
+  - comparison and buying-decision questions
+  - agentic multi-step web tasks
+notFor:
+  - offline use
+  - simple keyword lookups where a normal search is faster
+tags: [search, research, agent, answer-engine]
+outputTypes: [research, document]

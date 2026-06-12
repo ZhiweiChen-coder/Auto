@@ -1,0 +1,18 @@
+id: photoroom
+name: Photoroom
+url: https://www.photoroom.com
+category: image
+deployment: saas
+pricing: freemium
+description: AI photo editor for removing backgrounds, creating product shots, and batch-editing images for e-commerce and marketing.
+bestFor:
+  - product photos and background removal
+  - batch image editing for stores
+  - quick marketing visuals on mobile
+notFor:
+  - generating images from scratch
+  - complex illustration work
+tags: [image, photo-editing, ecommerce, background-removal]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [image]

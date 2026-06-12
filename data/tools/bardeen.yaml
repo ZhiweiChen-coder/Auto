@@ -13,4 +13,4 @@ notFor:
   - image or video generation
   - large backend systems
 tags: [automation, browser, scraping, productivity]
-
+outputTypes: [automation]

@@ -1,0 +1,18 @@
+id: invideo
+name: InVideo AI
+url: https://invideo.io
+category: video
+deployment: saas
+pricing: freemium
+description: Prompt-to-video tool that turns a script or idea into a full edited video with stock footage, voiceover, and captions.
+bestFor:
+  - faceless social and explainer videos
+  - turning scripts into edited videos fast
+  - adding voiceover and captions automatically
+notFor:
+  - cinematic generative video
+  - frame-level professional editing
+tags: [video, editing, social, voiceover]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [video]

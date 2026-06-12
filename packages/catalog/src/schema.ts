@@ -49,7 +49,7 @@ export const ToolSchema = z.object({
   bestForBeginners: z.boolean().optional(),
   requiresCoding: z.boolean().optional(),
   supportsChinese: z.boolean().optional(),
-  outputTypes: z.array(OutputTypeSchema).optional(),
+  outputTypes: z.array(OutputTypeSchema).min(1),
   commonUseCases: z.array(z.string().min(3)).optional(),
   avoidWhen: z.array(z.string().min(3)).optional(),
 });

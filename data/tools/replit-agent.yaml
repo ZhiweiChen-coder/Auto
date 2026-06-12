@@ -12,3 +12,4 @@ notFor:
   - large monorepos on local machines
   - air-gapped environments
 tags: [app-builder, ide, cloud, deploy]
+outputTypes: [app, website]

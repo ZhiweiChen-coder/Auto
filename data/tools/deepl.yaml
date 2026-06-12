@@ -1,0 +1,19 @@
+id: deepl
+name: DeepL Translator
+url: https://www.deepl.com/translator
+category: writing
+deployment: saas
+pricing: freemium
+description: High-accuracy AI translator covering many languages with natural phrasing, document translation, and glossary control.
+bestFor:
+  - accurate translation between languages
+  - translating whole documents
+  - nuance-preserving professional translation
+notFor:
+  - generating original content
+  - non-text media
+tags: [writing, translation, languages, localization]
+supportsChinese: true
+bestForBeginners: true
+difficulty: easy
+outputTypes: [document]

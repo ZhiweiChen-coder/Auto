@@ -1,0 +1,18 @@
+id: opus-clip
+name: Opus Clip
+url: https://www.opus.pro
+category: video
+deployment: saas
+pricing: freemium
+description: AI that repurposes long videos and podcasts into short vertical clips with captions, reframing, and virality scoring.
+bestFor:
+  - turning long videos into shorts and Reels
+  - auto-captioning and reframing clips
+  - finding the most shareable moments
+notFor:
+  - generating original video from text
+  - long-form film editing
+tags: [video, repurposing, shorts, captions]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [video]

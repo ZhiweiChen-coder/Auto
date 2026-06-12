@@ -13,3 +13,4 @@ notFor:
   - one-off web page generation without code
   - users who only need a chat tab
 tags: [coding, ide, agent, vscode]
+outputTypes: [code]

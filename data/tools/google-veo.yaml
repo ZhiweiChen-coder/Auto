@@ -1,0 +1,17 @@
+id: google-veo
+name: Google Veo
+url: https://deepmind.google/models/veo/
+category: video
+deployment: saas
+pricing: paid
+description: Google DeepMind's high-fidelity text- and image-to-video model with cinematic quality and native audio, available via Gemini and Flow.
+bestFor:
+  - high-quality cinematic AI video
+  - video clips with synced audio
+  - storyboarding inside Google's tools
+notFor:
+  - free unlimited generation
+  - precise manual frame editing
+tags: [video, generation, google, cinematic]
+difficulty: medium
+outputTypes: [video]

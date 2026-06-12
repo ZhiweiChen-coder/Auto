@@ -10,6 +10,13 @@ paths:
   /api/v1/recommend:
     post:
       summary: Recommend tools for a task
+      parameters:
+        - name: stream
+          in: query
+          description: Set to 1 to receive Server-Sent Events.
+          schema:
+            type: string
+            enum: ["1"]
       requestBody:
         required: true
         content:
@@ -26,6 +33,10 @@ paths:
                   type: integer
                   minimum: 0
                   maximum: 3
+                mode:
+                  type: string
+                  enum: [auto, workflow]
+                  description: Use workflow to force a multi-step recommendation.
       responses:
         "200":
           description: Recommendation or clarification request
@@ -115,6 +126,50 @@ paths:
                     type: string
                   avoid:
                     type: string
+                  workflow:
+                    type: object
+                    properties:
+                      summary:
+                        type: string
+                      toolCount:
+                        type: integer
+                      difficulty:
+                        type: string
+                        enum: [easy, medium, advanced]
+                      costTier:
+                        type: string
+                        enum: [free, freemium, paid]
+                      steps:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            order:
+                              type: integer
+                            title:
+                              type: string
+                            goal:
+                              type: string
+                            outputType:
+                              type: string
+                            tool:
+                              type: object
+                              properties:
+                                toolId:
+                                  type: string
+                                reason:
+                                  type: string
+                            alternatives:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  toolId:
+                                    type: string
+                                  reason:
+                                    type: string
+                            handoff:
+                              type: string
                   needsClarification:
                     type: object
                     properties:
@@ -124,10 +179,55 @@ paths:
                         type: array
                         items:
                           type: string
+            text/event-stream:
+              schema:
+                type: string
+              examples:
+                progress:
+                  value: |
+                    event: progress
+                    data: {"stage":"search"}
+
+                    event: result
+                    data: {"query":"build a landing page","primary":{"toolId":"lovable","confidence":"high","reason":"..."}}
         "401":
           description: Missing API key
+        "402":
+          description: Not enough credits in hosted open mode
         "429":
           description: Rate limited
+        "503":
+          description: Hosted open mode is missing a credit backend
+  /api/v1/config:
+    get:
+      summary: Public app configuration
+      responses:
+        "200":
+          description: Non-sensitive client config
+  /api/v1/credits:
+    get:
+      summary: Current credit balance
+      responses:
+        "200":
+          description: Metering state and remaining credits
+  /api/v1/checkout:
+    post:
+      summary: Create a Stripe Checkout Session for credit top-up
+      responses:
+        "200":
+          description: Checkout URL
+        "503":
+          description: Top-up unavailable
+  /api/v1/stripe/webhook:
+    post:
+      summary: Stripe webhook for credit grants
+      responses:
+        "200":
+          description: Webhook received
+        "400":
+          description: Invalid signature
+        "503":
+          description: Stripe not configured
   /api/v1/tools:
     get:
       summary: List catalog tools

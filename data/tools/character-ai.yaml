@@ -1,0 +1,16 @@
+id: character-ai
+name: Character.AI
+url: https://character.ai
+category: general
+deployment: saas
+pricing: freemium
+description: Platform for chatting with and creating AI characters and personas for roleplay, companionship, and interactive storytelling.
+bestFor:
+  - roleplay and character conversations
+  - interactive storytelling and practice dialogue
+  - building custom chat personas
+notFor:
+  - factual research or productivity work
+  - code generation
+tags: [chat, roleplay, characters, companion]
+outputTypes: [document]

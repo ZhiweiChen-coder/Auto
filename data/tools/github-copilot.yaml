@@ -13,3 +13,4 @@ notFor:
   - standalone app generation from scratch
   - users outside the Microsoft/GitHub ecosystem
 tags: [coding, completion, github, ide]
+outputTypes: [code]

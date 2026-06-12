@@ -13,4 +13,4 @@ notFor:
   - complex backend applications
   - local offline AI workflows
 tags: [website-builder, design, no-code, landing-page]
-
+outputTypes: [website]

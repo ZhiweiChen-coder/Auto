@@ -13,4 +13,4 @@ notFor:
   - complex code-heavy websites
   - local private image generation
 tags: [design, social-media, templates, adobe]
-
+outputTypes: [image, video]

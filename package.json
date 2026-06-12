@@ -13,7 +13,8 @@
     "index-catalog": "tsx scripts/index-catalog.ts",
     "index-catalog:mock": "tsx scripts/index-catalog-mock.ts",
     "validate-catalog": "tsx scripts/validate-catalog.ts",
-    "test:recommend": "tsx scripts/test-recommend.ts"
+    "test:recommend": "tsx scripts/test-recommend.ts",
+    "e2e": "tsx scripts/e2e-recommend.ts"
   },
   "engines": {
     "node": ">=20"

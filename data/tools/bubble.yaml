@@ -1,0 +1,17 @@
+id: bubble
+name: Bubble
+url: https://bubble.io
+category: app-builder
+deployment: saas
+pricing: freemium
+description: No-code platform for building full web apps with custom workflows, databases, and logic, plus AI to scaffold pages and features.
+bestFor:
+  - full web apps and SaaS prototypes without code
+  - custom database-driven products
+  - marketplaces and multi-user apps
+notFor:
+  - simple static sites
+  - users needing native mobile performance
+tags: [app-builder, no-code, web-app, saas]
+difficulty: medium
+outputTypes: [app, website]

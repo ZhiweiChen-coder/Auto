@@ -1,0 +1,16 @@
+id: mistral-le-chat
+name: Mistral Le Chat
+url: https://chat.mistral.ai
+category: general
+deployment: saas
+pricing: freemium
+description: Mistral AI's assistant backed by fast open-weight European models, with web search, document upload, and code help.
+bestFor:
+  - fast general-purpose chat
+  - coding and drafting with European data hosting
+  - teams wanting open-weight model options
+notFor:
+  - the very largest frontier reasoning tasks
+  - native image generation
+tags: [chat, reasoning, mistral, open-weight]
+outputTypes: [document, code]

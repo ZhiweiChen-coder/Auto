@@ -12,3 +12,4 @@ notFor:
   - deep codebase refactoring
   - local offline inference
 tags: [search, web, research]
+outputTypes: [research]

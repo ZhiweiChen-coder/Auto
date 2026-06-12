@@ -1,0 +1,16 @@
+id: meta-ai
+name: Meta AI
+url: https://www.meta.ai
+category: general
+deployment: saas
+pricing: free
+description: Meta's free assistant built on Llama, available standalone and inside WhatsApp, Instagram, and Messenger, with image generation.
+bestFor:
+  - free everyday questions and drafting
+  - quick image generation inside Meta apps
+  - casual help where you already chat
+notFor:
+  - sensitive or enterprise workloads
+  - precise long-document analysis
+tags: [chat, llama, meta, free]
+outputTypes: [document, image]

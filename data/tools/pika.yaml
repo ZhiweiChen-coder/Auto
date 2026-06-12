@@ -13,4 +13,4 @@ notFor:
   - document editing
   - workflow automation
 tags: [video, generative, social, creative]
-
+outputTypes: [video]

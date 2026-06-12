@@ -12,3 +12,4 @@ notFor:
   - non-technical marketing copy
   - local private inference
 tags: [search, developer, code, technical]
+outputTypes: [code, research]

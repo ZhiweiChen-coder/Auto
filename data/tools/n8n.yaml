@@ -12,3 +12,4 @@ notFor:
   - one-shot creative writing
   - building a customer-facing web UI from scratch
 tags: [automation, workflow, self-host, integrations]
+outputTypes: [automation]

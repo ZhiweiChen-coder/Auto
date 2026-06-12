@@ -1,13 +1,17 @@
 "use client";
 
 import type { Tool } from "@auto/catalog";
-import type { RecommendResponse } from "@auto/core";
+import type { ProgressStage, RecommendResponse } from "@auto/core";
 import { useEffect, useMemo, useState } from "react";
 import { ClarificationPanel } from "@/components/ClarificationPanel";
 import { CopyShareLink } from "@/components/CopyShareLink";
 import { FeedbackButtons } from "@/components/FeedbackButtons";
 import { PromptCopyButton } from "@/components/PromptCopyButton";
 import { SearchForm } from "@/components/SearchForm";
+import { WorkflowChain } from "@/components/WorkflowChain";
+import { ByokKeyPanel } from "@/components/ByokKeyPanel";
+import { CreditsBadge } from "@/components/CreditsBadge";
+import { readStoredApiKey } from "@/lib/useApiKey";
 
 type ResultsClientProps = {
   initialQuery: string;
@@ -58,12 +62,33 @@ function compactStep(step: string, toolName?: string) {
   return compact;
 }
 
+// Real pipeline stages, in order. Drives the live status nodes 1:1 — the value
+// comes from the backend as it actually reaches each stage, not a timer.
+const STAGE_ORDER: ProgressStage[] = [
+  "understand",
+  "search",
+  "compare",
+  "recommend",
+];
+
+// Where the progress bar sits while each real stage is in flight. We anchor to
+// the stage rather than elapsed time so the bar reflects genuine work done.
+const STAGE_PROGRESS: Record<ProgressStage, number> = {
+  understand: 26,
+  search: 52,
+  compare: 76,
+  recommend: 92,
+};
+
+type NodeState = "done" | "active" | "pending" | "error";
+
 function LiveChain({
   phase,
   query,
   toolsCount,
   result,
   selectedName,
+  stage,
   elapsedMs,
 }: {
   phase: RequestPhase;
@@ -71,36 +96,52 @@ function LiveChain({
   toolsCount: number;
   result?: RecommendResponse;
   selectedName?: string;
+  stage?: ProgressStage;
   elapsedMs: number;
 }) {
   const routeCount = result?.routeCards?.length ?? 0;
   const isSlow = phase === "loading" && elapsedMs > 8000;
-  const progressWidth = phase === "ready" ? "100%" : `${Math.min(88, 18 + elapsedMs / 260)}%`;
+
+  // Index of the stage currently running (or completed past) per the backend.
+  const currentIndex =
+    phase === "ready"
+      ? STAGE_ORDER.length
+      : STAGE_ORDER.indexOf(stage ?? "understand");
+
+  const progressWidth =
+    phase === "ready" ? "100%" : `${STAGE_PROGRESS[stage ?? "understand"]}%`;
+
+  const nodeState = (nodeIndex: number): NodeState => {
+    if (phase === "error") return "error";
+    if (phase === "ready" || nodeIndex < currentIndex) return "done";
+    if (nodeIndex === currentIndex) return "active";
+    return "pending";
+  };
+
   const items = [
     {
-      label: "Task",
-      detail: query,
-      state: "done",
+      id: "task",
+      label: "Understand",
+      detail: nodeState(0) === "done" ? "Task understood" : query,
+      state: nodeState(0),
     },
     {
-      label: "Catalog",
+      id: "catalog",
+      label: "Search",
       detail: `${toolsCount} tools`,
-      state: "done",
+      state: nodeState(1),
     },
     {
-      label: "Request",
-      detail: phase === "error" ? "Stopped" : "API sent",
-      state: phase === "error" ? "error" : "done",
+      id: "compare",
+      label: "Compare",
+      detail: selectedName ? `Picked ${selectedName}` : "Checking fit",
+      state: nodeState(2),
     },
     {
-      label: "Rank",
-      detail: selectedName ? `Picked ${selectedName}` : "Comparing",
-      state: phase === "ready" ? "done" : phase === "error" ? "error" : "active",
-    },
-    {
-      label: "Route",
+      id: "route",
+      label: "Recommend",
       detail: routeCount > 0 ? `${routeCount} paths` : "Writing",
-      state: phase === "ready" ? "done" : phase === "error" ? "error" : "pending",
+      state: nodeState(3),
     },
   ];
 
@@ -131,12 +172,12 @@ function LiveChain({
       </div>
       {isSlow && (
         <p className="mt-3 text-sm text-canvas-muted">
-          Still ranking the short list. This can take a little longer when the
-          model is comparing close matches.
+          Still comparing the strongest options. This can take a little longer
+          when several tools are close matches.
         </p>
       )}
 
-      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-5">
+      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {items.map((item, index) => (
           <div
             key={item.label}
@@ -164,14 +205,21 @@ function LiveChain({
 
 export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
   const [phase, setPhase] = useState<RequestPhase>("loading");
+  const [stage, setStage] = useState<ProgressStage>();
   const [result, setResult] = useState<RecommendResponse>();
   const [error, setError] = useState<string>();
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [reloadKey, setReloadKey] = useState(0);
+  const [forcedWorkflowQuery, setForcedWorkflowQuery] = useState<string | null>(
+    null,
+  );
+  const forceWorkflow = forcedWorkflowQuery === initialQuery;
 
   useEffect(() => {
     const controller = new AbortController();
     const startedAt = performance.now();
     setPhase("loading");
+    setStage(undefined);
     setResult(undefined);
     setError(undefined);
     setElapsedMs(0);
@@ -182,20 +230,71 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
 
     async function run() {
       try {
-        const response = await fetch("/api/v1/recommend", {
+        // Send the user's own key (BYOK) when present, as a Bearer token.
+        const storedKey = readStoredApiKey();
+        const headers: Record<string, string> = {
+          "Content-Type": "application/json",
+          Accept: "text/event-stream",
+        };
+        if (storedKey) headers.Authorization = `Bearer ${storedKey}`;
+
+        // Ask for the streaming variant so we get real per-stage progress.
+        const response = await fetch("/api/v1/recommend?stream=1", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: initialQuery, limit: 2 }),
+          headers,
+          body: JSON.stringify({
+            query: initialQuery,
+            limit: 2,
+            mode: forceWorkflow ? "workflow" : "auto",
+          }),
           signal: controller.signal,
         });
-        const data = await response.json();
 
-        if (!response.ok) {
+        // A non-OK response (e.g. rate limit, bad body) is plain JSON, not SSE.
+        if (!response.ok || !response.body) {
+          const data = await response.json().catch(() => ({}));
           throw new Error(data.error ?? "Recommendation failed");
         }
 
-        setResult(data as RecommendResponse);
-        setPhase("ready");
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let settled = false;
+
+        while (!settled) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          // SSE frames are separated by a blank line; keep the trailing partial.
+          const frames = buffer.split("\n\n");
+          buffer = frames.pop() ?? "";
+
+          for (const frame of frames) {
+            let event = "message";
+            let data = "";
+            for (const line of frame.split("\n")) {
+              if (line.startsWith("event:")) event = line.slice(6).trim();
+              else if (line.startsWith("data:")) data += line.slice(5).trim();
+            }
+            if (!data) continue;
+            const payload = JSON.parse(data);
+
+            if (event === "progress") {
+              setStage(payload.stage as ProgressStage);
+            } else if (event === "result") {
+              setResult(payload as RecommendResponse);
+              setPhase("ready");
+              settled = true;
+            } else if (event === "error") {
+              throw new Error(payload.error ?? "Recommendation failed");
+            }
+          }
+        }
+
+        if (!settled) {
+          throw new Error("Recommendation ended unexpectedly");
+        }
       } catch (err) {
         if (controller.signal.aborted) return;
         setError(err instanceof Error ? err.message : "Recommendation failed");
@@ -212,7 +311,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
       controller.abort();
       window.clearInterval(timer);
     };
-  }, [initialQuery]);
+  }, [initialQuery, reloadKey, forceWorkflow]);
 
   const primary = result?.primary
     ? getToolById(tools, result.primary.toolId)
@@ -234,7 +333,8 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
 
   return (
     <div className="mx-auto w-full max-w-5xl flex-1 px-5 py-6 sm:px-8 lg:px-10">
-      <div className="mb-4 flex items-center justify-end">
+      <div className="mb-4 flex items-center justify-end gap-3">
+        <CreditsBadge />
         <CopyShareLink query={initialQuery} />
       </div>
       <SearchForm initialQuery={initialQuery} variant="compact" />
@@ -246,6 +346,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
           toolsCount={tools.length}
           result={result}
           selectedName={primary?.name}
+          stage={stage}
           elapsedMs={elapsedMs}
         />
 
@@ -259,22 +360,59 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
         )}
 
         {phase === "error" && (
-          <div className="result-enter rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
-            {error}
+          <div className="result-enter rounded-2xl border border-red-200 bg-red-50 px-5 py-4">
+            <p className="text-sm text-red-700">{error}</p>
+            <button
+              type="button"
+              onClick={() => setReloadKey((k) => k + 1)}
+              className="press mt-3 inline-flex rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+            >
+              Try again
+            </button>
+            {error?.toLowerCase().includes("api key") && <ByokKeyPanel />}
           </div>
         )}
 
         {result?.needsClarification && (
           <div className="result-enter">
-            <ClarificationPanel data={result.needsClarification} />
-            <p className="mt-4 text-center text-sm text-canvas-muted">
-              Update your description above and press Recommend again.
-            </p>
+            <ClarificationPanel
+              data={result.needsClarification}
+              query={initialQuery}
+            />
           </div>
         )}
 
-        {phase === "ready" && result && !result.needsClarification && !primary && (
-          <p className="result-enter text-canvas-muted">No recommendation available.</p>
+        {phase === "ready" && result?.workflow && (
+          <>
+            <WorkflowChain workflow={result.workflow} tools={tools} />
+            <FeedbackButtons
+              query={initialQuery}
+              primaryToolId={result.workflow.steps[0]?.tool.toolId}
+              alternativeToolIds={result.workflow.steps
+                .slice(1)
+                .map((step) => step.tool.toolId)}
+              elapsedMs={elapsedMs}
+            />
+          </>
+        )}
+
+        {phase === "ready" &&
+          result &&
+          !result.needsClarification &&
+          !result.workflow &&
+          !primary && (
+          <div className="result-enter rounded-2xl border border-canvas-border bg-canvas-white px-6 py-5 text-sm text-canvas-muted">
+            <p className="font-semibold text-canvas-text">
+              No clear match for that task yet.
+            </p>
+            <p className="mt-1">
+              Try rephrasing with the outcome you want, or{" "}
+              <a href="/browse" className="font-semibold text-canvas-brand hover:underline">
+                browse the full catalog
+              </a>
+              .
+            </p>
+          </div>
         )}
 
         {phase === "ready" && result && primary && (
@@ -315,7 +453,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                     href={primary.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-7 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-canvas-text transition-colors hover:bg-canvas-base"
+                    className="lift press mt-7 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-canvas-text hover:bg-canvas-base"
                   >
                     Open {primary.name}
                   </a>
@@ -346,7 +484,12 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                       </li>
                     ))}
                   </ol>
-                  <pre className="mt-5 max-h-28 overflow-auto whitespace-pre-wrap rounded-2xl bg-canvas-base p-4 text-sm leading-relaxed text-canvas-text">{result.actionGuide.copyPrompt}</pre>
+                  <details className="mt-5 rounded-2xl bg-canvas-base p-4">
+                    <summary className="cursor-pointer text-xs font-semibold text-canvas-muted">
+                      Show ready-to-paste prompt
+                    </summary>
+                    <pre className="mt-3 max-h-40 overflow-auto whitespace-pre-wrap text-sm leading-relaxed text-canvas-text">{result.actionGuide.copyPrompt}</pre>
+                  </details>
                 </article>
               )}
             </section>
@@ -358,6 +501,22 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
               routeLabels={result.routeCards?.map((route) => route.label)}
               elapsedMs={elapsedMs}
             />
+
+            <div className="rounded-2xl border border-dashed border-canvas-border bg-canvas-white/60 px-5 py-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-canvas-muted">
+                  This task may take more than one tool. See a step-by-step
+                  workflow instead?
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setForcedWorkflowQuery(initialQuery)}
+                  className="lift press inline-flex shrink-0 rounded-full bg-canvas-text px-4 py-2 text-sm font-semibold text-white hover:bg-canvas-text/90"
+                >
+                  See full workflow
+                </button>
+              </div>
+            </div>
 
             {result.routeCards && result.routeCards.length > 0 && (
               <section>
@@ -372,7 +531,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                     return (
                       <article
                         key={route.label}
-                        className={`rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 ${tone.ring}`}
+                        className={`lift rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 hover:shadow-card ${tone.ring}`}
                       >
                         <span
                           className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${tone.badge}`}
@@ -390,7 +549,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                                 href={tool.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-full bg-canvas-brandLight px-3 py-1 text-xs font-semibold text-canvas-brand transition-colors hover:bg-canvas-brand hover:text-white"
+                                className="press rounded-full bg-canvas-brandLight px-3 py-1 text-xs font-semibold text-canvas-brand hover:bg-canvas-brand hover:text-white"
                               >
                                 {tool.name}
                               </a>
@@ -413,7 +572,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                   {alternatives.map(({ rec, tool }) => (
                     <article
                       key={tool.id}
-                      className="rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 ring-canvas-border/60"
+                      className="lift rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 ring-canvas-border/60 hover:shadow-card"
                     >
                       <h3 className="text-lg font-bold text-canvas-text">
                         {tool.name}

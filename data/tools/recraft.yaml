@@ -1,0 +1,16 @@
+id: recraft
+name: Recraft
+url: https://www.recraft.ai
+category: image
+deployment: saas
+pricing: freemium
+description: Image generator built for designers, producing consistent brand styles, vector art, icons, and mockups with precise control.
+bestFor:
+  - on-brand illustrations and icon sets
+  - editable vector graphics
+  - consistent style across many images
+notFor:
+  - photorealistic human portraits
+  - video content
+tags: [image, design, vector, branding]
+outputTypes: [image]

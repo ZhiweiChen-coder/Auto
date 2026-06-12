@@ -13,4 +13,4 @@ notFor:
   - image generation
   - building websites
 tags: [meetings, transcription, notes, automation]
-
+outputTypes: [document]

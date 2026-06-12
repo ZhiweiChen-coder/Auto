@@ -12,3 +12,4 @@ notFor:
   - no-code landing pages
   - pure search and research tasks
 tags: [coding, ide, agent, codeium]
+outputTypes: [code]

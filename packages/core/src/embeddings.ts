@@ -72,7 +72,24 @@ export function retrieveTopK(
   embeddings: EmbeddingsFile,
   k: number,
 ): Array<{ toolId: string; score: number }> {
-  const scored = embeddings.tools.map((t) => ({
+  return retrieveTopKFiltered(queryEmbedding, embeddings, k);
+}
+
+/**
+ * Like {@link retrieveTopK} but restricts scoring to `allowedToolIds` when
+ * provided. Used by workflow per-step retrieval to keep each step within the
+ * tools that produce the right output type.
+ */
+export function retrieveTopKFiltered(
+  queryEmbedding: number[],
+  embeddings: EmbeddingsFile,
+  k: number,
+  allowedToolIds?: Set<string>,
+): Array<{ toolId: string; score: number }> {
+  const pool = allowedToolIds
+    ? embeddings.tools.filter((t) => allowedToolIds.has(t.toolId))
+    : embeddings.tools;
+  const scored = pool.map((t) => ({
     toolId: t.toolId,
     score: cosineSimilarity(queryEmbedding, t.embedding),
   }));

@@ -13,4 +13,4 @@ notFor:
   - custom web application building
   - research citation discovery
 tags: [voice, audio, narration, video]
-
+outputTypes: [audio]

@@ -1,0 +1,16 @@
+id: flux
+name: FLUX
+url: https://blackforestlabs.ai
+category: image
+deployment: api
+pricing: freemium
+description: Black Forest Labs' high-quality image generation models known for sharp detail and accurate text rendering, available via API and partners.
+bestFor:
+  - photorealistic and detailed image generation
+  - images that include readable text
+  - developers integrating image generation
+notFor:
+  - non-technical users wanting a polished GUI
+  - video generation
+tags: [image, generation, api, photorealistic]
+outputTypes: [image]

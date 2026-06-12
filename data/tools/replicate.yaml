@@ -12,3 +12,4 @@ notFor:
   - non-technical users wanting a simple chat UI
   - fully offline workflows
 tags: [api, models, developers, inference]
+outputTypes: [code, image]

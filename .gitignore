@@ -2,6 +2,8 @@ node_modules/
 .next/
 dist/
 .turbo/
+.claude/
+*.tsbuildinfo
 .env
 .env.local
 .env.*.local

@@ -32,7 +32,8 @@ export function SearchForm({
   }
 
   function onKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+    if (e.nativeEvent.isComposing) return;
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       submit();
     }
@@ -41,7 +42,7 @@ export function SearchForm({
   return (
     <form onSubmit={onSubmit} className="w-full">
       <div
-        className={`relative rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60 transition-shadow focus-within:shadow-[0_12px_40px_rgba(29,29,31,0.10)] ${
+        className={`hero-search relative rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60 ${
           isHero ? "min-h-[190px] sm:min-h-[220px]" : "min-h-[92px]"
         }`}
       >
@@ -65,14 +66,15 @@ export function SearchForm({
           aria-label="Describe your task"
         />
         <div className="absolute bottom-4 right-4 flex items-center gap-3">
-          {!isHero && (
-            <span className="hidden text-xs text-canvas-subtle md:inline">
-              ⌘ + Enter
-            </span>
+          <span className="hidden text-xs text-canvas-subtle md:inline">
+            {isHero ? "Press Enter to search · Shift + Enter for new line" : "Shift + Enter for new line"}
+          </span>
+          {isHero && (
+            <span className="text-xs text-canvas-subtle md:hidden">Enter to search</span>
           )}
           <button
             type="submit"
-            className="rounded-full bg-canvas-brand px-6 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-canvas-brandHover"
+            className="lift press rounded-full bg-canvas-brand px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-canvas-brandHover"
           >
             Recommend
           </button>

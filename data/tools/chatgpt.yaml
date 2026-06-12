@@ -13,3 +13,4 @@ notFor:
   - specialized real-time search (prefer Perplexity)
   - production app deployment
 tags: [general, chat, openai, multimodal]
+outputTypes: [document, code]

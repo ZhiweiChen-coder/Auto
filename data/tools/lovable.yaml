@@ -13,3 +13,4 @@ notFor:
   - maintaining a large legacy codebase
   - backend-only CLI workflows
 tags: [app-builder, web, full-stack, no-code]
+outputTypes: [app, website]

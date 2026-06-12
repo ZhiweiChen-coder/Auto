@@ -4,6 +4,7 @@ import {
   DeploymentBadge,
   PricingBadge,
 } from "./Badges";
+import { ToolLogo } from "./ToolLogo";
 
 type ToolCardProps = {
   tool: Tool;
@@ -22,7 +23,7 @@ export function ToolCard({
 
   return (
     <article
-      className={`rounded-2xl bg-canvas-white p-6 shadow-soft ring-1 ring-canvas-border/60 ${
+      className={`lift rounded-2xl bg-canvas-white p-6 shadow-soft ring-1 ring-canvas-border/60 hover:shadow-card ${
         isPrimary ? "ring-2 ring-canvas-brand/25 shadow-card" : ""
       }`}
     >
@@ -41,7 +42,10 @@ export function ToolCard({
         <DeploymentBadge deployment={tool.deployment} />
         <PricingBadge pricing={tool.pricing} />
       </div>
-      <h3 className="text-xl font-bold text-canvas-text">{tool.name}</h3>
+      <div className="flex items-center gap-3">
+        <ToolLogo name={tool.name} url={tool.url} className="h-14 w-14" />
+        <h3 className="text-xl font-bold text-canvas-text">{tool.name}</h3>
+      </div>
       <p className="mt-1 text-sm text-canvas-muted">{tool.description}</p>
       {reason && (
         <p className="mt-4 text-sm leading-relaxed text-canvas-text">{reason}</p>
@@ -50,7 +54,7 @@ export function ToolCard({
         href={tool.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-5 inline-flex items-center gap-1 rounded-full bg-canvas-text px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-black"
+        className="lift press mt-5 inline-flex items-center gap-1 rounded-full bg-canvas-text px-5 py-2 text-sm font-semibold text-white hover:bg-black"
       >
         Open {tool.name}
       </a>

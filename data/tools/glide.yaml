@@ -1,0 +1,18 @@
+id: glide
+name: Glide
+url: https://www.glideapps.com
+category: app-builder
+deployment: saas
+pricing: freemium
+description: No-code builder that turns spreadsheets and data sources into polished mobile and web apps, with AI to generate apps and fields.
+bestFor:
+  - turning a spreadsheet into an app
+  - simple business and team apps without code
+  - fast mobile-friendly prototypes
+notFor:
+  - complex custom backend logic
+  - graphics-heavy consumer apps
+tags: [app-builder, no-code, spreadsheet, mobile]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [app]

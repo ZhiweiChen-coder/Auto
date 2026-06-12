@@ -7,6 +7,7 @@ import {
   DeploymentBadge,
   PricingBadge,
 } from "./Badges";
+import { ToolLogo } from "./ToolLogo";
 
 export function BrowseSearch({ tools }: { tools: Tool[] }) {
   const [q, setQ] = useState("");
@@ -52,9 +53,7 @@ export function BrowseSearch({ tools }: { tools: Tool[] }) {
                 <DeploymentBadge deployment={tool.deployment} />
                 <PricingBadge pricing={tool.pricing} />
               </div>
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-canvas-base text-sm font-bold text-canvas-text">
-                {tool.name.slice(0, 1)}
-              </span>
+              <ToolLogo name={tool.name} url={tool.url} className="h-12 w-12" />
             </div>
             <h2 className="font-bold text-canvas-text">{tool.name}</h2>
             <p className="mt-1 line-clamp-2 text-sm text-canvas-muted">

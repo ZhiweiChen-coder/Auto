@@ -1,5 +1,5 @@
 import { CATALOG_VERSION, getCatalogTools } from "@/lib/catalog";
-import { jsonResponse } from "@/lib/api";
+import { jsonResponse, preflightResponse } from "@/lib/api";
 
 export async function GET() {
   const tools = await getCatalogTools();
@@ -11,5 +11,5 @@ export async function GET() {
 }
 
 export async function OPTIONS() {
-  return jsonResponse({}, { status: 204 });
+  return preflightResponse();
 }

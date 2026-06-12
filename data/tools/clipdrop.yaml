@@ -1,0 +1,18 @@
+id: clipdrop
+name: Clipdrop
+url: https://clipdrop.co
+category: image
+deployment: saas
+pricing: freemium
+description: Suite of AI image tools for background removal, upscaling, relighting, cleanup, and generation, usable in browser and API.
+bestFor:
+  - cleaning up and upscaling images
+  - removing objects and backgrounds
+  - quick one-off image edits
+notFor:
+  - full design systems and brand kits
+  - video editing
+tags: [image, photo-editing, upscale, cleanup]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [image]

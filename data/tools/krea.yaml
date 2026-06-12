@@ -13,4 +13,4 @@ notFor:
   - meeting transcription
   - backend application development
 tags: [image, creative, upscaling, real-time]
-
+outputTypes: [image]

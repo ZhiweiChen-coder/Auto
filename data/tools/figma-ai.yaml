@@ -12,3 +12,4 @@ notFor:
   - generating deployable production backend code alone
   - CLI-based automation
 tags: [design, ui, prototyping, figma]
+outputTypes: [image]

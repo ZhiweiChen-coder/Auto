@@ -1,0 +1,16 @@
+id: grok
+name: Grok
+url: https://grok.com
+category: general
+deployment: saas
+pricing: freemium
+description: xAI's conversational assistant with real-time access to X (Twitter) data, strong reasoning, and an irreverent tone.
+bestFor:
+  - questions about current events and live X discussion
+  - general reasoning and brainstorming
+  - quick answers with a casual voice
+notFor:
+  - offline or air-gapped use
+  - tasks needing strict, formal output
+tags: [chat, reasoning, xai, realtime]
+outputTypes: [document, code]

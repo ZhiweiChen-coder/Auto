@@ -13,4 +13,4 @@ notFor:
   - custom full-stack apps
   - local development workflows
 tags: [website-builder, no-code, small-business, beginner]
-
+outputTypes: [website]

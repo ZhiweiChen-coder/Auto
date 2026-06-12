@@ -1,0 +1,18 @@
+id: claude-code
+name: Claude Code
+url: https://www.claude.com/product/claude-code
+category: coding
+deployment: hybrid
+pricing: paid
+description: Anthropic's agentic coding tool that lives in your terminal and IDE, editing files, running commands, and handling multi-step tasks.
+bestFor:
+  - agentic multi-file changes from the terminal
+  - large refactors and codebase-wide tasks
+  - scripting and automation around a real repo
+notFor:
+  - non-developers
+  - one-click no-code app building
+tags: [coding, agent, cli, anthropic]
+requiresCoding: true
+difficulty: medium
+outputTypes: [code]

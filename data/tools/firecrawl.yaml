@@ -12,3 +12,4 @@ notFor:
   - non-technical end users
   - one-click chat answers without setup
 tags: [search, api, scraping, developers]
+outputTypes: [research]

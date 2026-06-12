@@ -13,3 +13,4 @@ notFor:
   - complete backend systems
   - non-web native mobile apps
 tags: [app-builder, react, ui, vercel]
+outputTypes: [app, website]

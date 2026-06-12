@@ -1,0 +1,17 @@
+id: kimi
+name: Kimi
+url: https://kimi.moonshot.cn
+category: general
+deployment: saas
+pricing: freemium
+description: Moonshot AI's assistant known for very long context windows, file and webpage reading, and strong Chinese comprehension.
+bestFor:
+  - summarizing long documents and many files
+  - Chinese-language research and reading
+  - web-grounded question answering
+notFor:
+  - English-first enterprise support
+  - image or video generation
+tags: [chat, long-context, moonshot, research]
+supportsChinese: true
+outputTypes: [document, research]

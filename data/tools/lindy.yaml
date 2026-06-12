@@ -1,0 +1,17 @@
+id: lindy
+name: Lindy
+url: https://www.lindy.ai
+category: automation
+deployment: saas
+pricing: freemium
+description: No-code platform for building AI agents that handle email, meetings, CRM updates, and multi-step workflows across your apps.
+bestFor:
+  - AI assistants that act across your tools
+  - automating email and scheduling
+  - multi-step agent workflows without code
+notFor:
+  - simple single-trigger automations
+  - users needing on-prem hosting
+tags: [automation, agent, no-code, workflow]
+difficulty: medium
+outputTypes: [automation]

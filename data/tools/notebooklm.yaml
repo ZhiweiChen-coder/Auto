@@ -12,3 +12,4 @@ notFor:
   - live breaking news search
   - shipping a web application
 tags: [writing, research, documents, google]
+outputTypes: [document, research]

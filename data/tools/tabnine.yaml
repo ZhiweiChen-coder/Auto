@@ -13,4 +13,4 @@ notFor:
   - no-code social graphics
   - academic paper discovery
 tags: [coding, autocomplete, ide, enterprise]
-
+outputTypes: [code]

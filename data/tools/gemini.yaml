@@ -13,3 +13,4 @@ notFor:
   - specialized citation-heavy research (use Perplexity)
   - offline private inference
 tags: [general, google, multimodal, chat]
+outputTypes: [document, code]

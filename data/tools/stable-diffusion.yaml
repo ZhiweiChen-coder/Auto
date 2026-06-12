@@ -1,0 +1,18 @@
+id: stable-diffusion
+name: Stable Diffusion
+url: https://stability.ai
+category: image
+deployment: local
+pricing: free
+description: Open-weight image generation models from Stability AI you can run locally or via API for full control over style and content.
+bestFor:
+  - free local image generation
+  - custom fine-tuning and full control
+  - private, offline image workflows
+notFor:
+  - non-technical users wanting one click
+  - guaranteed brand-safe outputs
+tags: [image, open-weight, local, generation]
+requiresCoding: true
+difficulty: advanced
+outputTypes: [image]

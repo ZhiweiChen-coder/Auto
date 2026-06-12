@@ -1,0 +1,17 @@
+id: qwen
+name: Qwen Chat
+url: https://chat.qwen.ai
+category: general
+deployment: saas
+pricing: freemium
+description: Alibaba's Qwen assistant with strong bilingual Chinese-English ability, long context, coding, and vision understanding.
+bestFor:
+  - Chinese-language writing and reasoning
+  - long-document and multilingual tasks
+  - coding help with open-weight models
+notFor:
+  - users needing Western data residency
+  - offline use without setup
+tags: [chat, reasoning, alibaba, open-weight]
+supportsChinese: true
+outputTypes: [document, code]

@@ -13,4 +13,4 @@ notFor:
   - source-controlled coding inside an IDE
   - full meeting transcription workflows
 tags: [chat, multi-model, bots, general]
-
+outputTypes: [document]

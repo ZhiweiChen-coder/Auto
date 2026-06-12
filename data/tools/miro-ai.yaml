@@ -13,4 +13,4 @@ notFor:
   - source-cited academic search
   - local model inference
 tags: [whiteboard, collaboration, diagrams, brainstorming]
-
+outputTypes: [document]

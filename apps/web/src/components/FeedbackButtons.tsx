@@ -61,7 +61,9 @@ export function FeedbackButtons({
   return (
     <div className="result-enter rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 ring-canvas-border/60">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm font-semibold text-canvas-text">Was this useful?</p>
+        <p className="text-sm font-semibold text-canvas-text">
+          Did this help you find the right tool?
+        </p>
         <div className="flex flex-wrap gap-2">
           {options.map((option) => (
             <button
@@ -82,7 +84,9 @@ export function FeedbackButtons({
       </div>
       {status === "saved" && (
         <p className="mt-3 text-xs font-medium text-emerald-700">
-          Saved. This helps Auto learn.
+          {selected === "good_match"
+            ? "Glad it helped — thanks for letting us know!"
+            : "Thanks — we'll use this to improve your next results."}
         </p>
       )}
       {status === "error" && (

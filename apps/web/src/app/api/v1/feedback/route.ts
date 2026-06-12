@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { errorResponse, jsonResponse } from "@/lib/api";
+import { errorResponse, jsonResponse, preflightResponse, publicError } from "@/lib/api";
 import { saveFeedback, type FeedbackRecord } from "@/lib/feedback-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
@@ -14,7 +14,7 @@ const FeedbackSchema = z.object({
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const rate = checkRateLimit(`feedback:${ip}`);
+  const rate = await checkRateLimit(`feedback:${ip}`);
   if (!rate.ok) {
     return errorResponse(
       `Rate limit exceeded. Retry after ${rate.retryAfterSec}s.`,
@@ -45,13 +45,13 @@ export async function POST(request: Request) {
   try {
     await saveFeedback(record);
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Could not save feedback";
-    return errorResponse(message, 500);
+    const { status, message } = publicError(err, "Could not save feedback");
+    return errorResponse(message, status);
   }
 
   return jsonResponse({ ok: true, feedbackId });
 }
 
 export async function OPTIONS() {
-  return jsonResponse({}, { status: 204 });
+  return preflightResponse();
 }

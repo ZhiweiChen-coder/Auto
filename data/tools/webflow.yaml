@@ -13,4 +13,4 @@ notFor:
   - quick throwaway prototypes
   - local private AI chat
 tags: [website-builder, no-code, cms, design]
-
+outputTypes: [website]

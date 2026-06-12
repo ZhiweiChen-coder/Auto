@@ -12,3 +12,4 @@ notFor:
   - production React applications
   - local LLM inference
 tags: [writing, presentations, slides, design]
+outputTypes: [presentation, document]

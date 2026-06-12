@@ -21,11 +21,11 @@ export function RecentSearches({ onPick }: { onPick: (query: string) => void }) 
   if (items.length === 0) return null;
 
   return (
-    <div className="mt-5 w-full max-w-3xl text-center">
+    <div className="mt-2 w-full text-center">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="text-xs font-semibold uppercase tracking-wide text-canvas-subtle transition-colors hover:text-canvas-muted"
+        className="press inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-canvas-subtle transition-colors hover:text-canvas-muted"
       >
         {open ? "Hide recent" : "Recent"}
       </button>

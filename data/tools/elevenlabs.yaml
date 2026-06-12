@@ -12,3 +12,4 @@ notFor:
   - image generation
   - codebase refactoring
 tags: [audio, voice, tts, narration]
+outputTypes: [audio]

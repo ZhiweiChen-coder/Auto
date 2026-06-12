@@ -1,0 +1,18 @@
+id: kling
+name: Kling AI
+url: https://klingai.com
+category: video
+deployment: saas
+pricing: freemium
+description: Kuaishou's text- and image-to-video generator known for fluid motion and longer clips, with strong support for Chinese prompts.
+bestFor:
+  - image-to-video animation
+  - longer AI video clips with smooth motion
+  - Chinese-language prompting
+notFor:
+  - frame-precise professional editing
+  - offline use
+tags: [video, generation, image-to-video, kuaishou]
+supportsChinese: true
+difficulty: medium
+outputTypes: [video]

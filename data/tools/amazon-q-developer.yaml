@@ -1,0 +1,17 @@
+id: amazon-q-developer
+name: Amazon Q Developer
+url: https://aws.amazon.com/q/developer/
+category: coding
+deployment: saas
+pricing: freemium
+description: AWS coding assistant for in-IDE completions, chat, and agentic tasks, with deep knowledge of AWS services and security scanning.
+bestFor:
+  - building and debugging on AWS
+  - code completion and security scans in the IDE
+  - upgrading and migrating Java apps
+notFor:
+  - teams not using AWS
+  - no-code users
+tags: [coding, aws, assistant, ide]
+requiresCoding: true
+outputTypes: [code]

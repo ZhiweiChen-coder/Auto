@@ -1,0 +1,17 @@
+id: notion-ai
+name: Notion AI
+url: https://www.notion.so/product/ai
+category: writing
+deployment: saas
+pricing: freemium
+description: AI built into Notion that drafts, summarizes, and answers questions across your workspace docs, wikis, and databases.
+bestFor:
+  - drafting and summarizing inside your notes
+  - Q&A over your team's workspace
+  - turning rough notes into structured docs
+notFor:
+  - users not on Notion
+  - generating images or video
+tags: [writing, productivity, notes, knowledge-base]
+bestForBeginners: true
+outputTypes: [document]

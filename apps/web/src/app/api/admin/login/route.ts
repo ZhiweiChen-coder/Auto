@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   }
 
   const ip = getClientIp(request);
-  const rate = checkRateLimit(`admin-login:${ip}`);
+  const rate = await checkRateLimit(`admin-login:${ip}`);
   if (!rate.ok) {
     return errorResponse(
       `Rate limit exceeded. Retry after ${rate.retryAfterSec}s.`,

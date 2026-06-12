@@ -1,0 +1,18 @@
+id: tome
+name: Tome
+url: https://tome.app
+category: writing
+deployment: saas
+pricing: freemium
+description: AI presentation and storytelling tool that turns prompts or docs into polished slide decks and narratives.
+bestFor:
+  - generating slide decks from a prompt
+  - sales and pitch narratives
+  - quick visual storytelling
+notFor:
+  - pixel-perfect manual slide design
+  - spreadsheet-heavy reports
+tags: [writing, presentation, slides, storytelling]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [presentation, document]

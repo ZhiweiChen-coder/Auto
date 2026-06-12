@@ -13,4 +13,4 @@ notFor:
   - image generation
   - local LLM hosting
 tags: [meetings, transcription, summaries, clips]
-
+outputTypes: [document]

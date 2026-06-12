@@ -67,10 +67,21 @@ Restart the dev server after saving.
 | `OPENAI_API_KEY` | **Required** — powers recommendations and catalog indexing |
 | `EMBEDDING_MODEL` | Default: `text-embedding-3-small` |
 | `RANKER_MODEL` | Default: `gpt-4o-mini` |
+| `INTENT_MODEL` | Default: `gpt-4o-mini`; routes single vs workflow tasks |
+| `PLANNER_MODEL` | Default: `RANKER_MODEL`; plans workflow steps |
+| `APP_MODE` | Default: `local`; set `open` for hosted shared-key + credits |
+| `NEXT_PUBLIC_APP_URL` | Public app URL for checkout redirects and docs examples |
+| `ALLOWED_ORIGIN` | Optional CORS origin for hosted open mode |
 | `ADMIN_TOKEN` | Optional — enables `/admin/login` and protects `/admin/feedback` |
+| `SESSION_SECRET` | Recommended — signs admin and anonymous credit cookies |
 | `FEEDBACK_STORE` | Default: `file`; use `webhook` for deployed/serverless feedback |
 | `FEEDBACK_WEBHOOK_URL` | Optional — receives feedback records in production |
 | `FEEDBACK_WEBHOOK_SECRET` | Optional bearer token for the feedback webhook |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Required when `APP_MODE=open` |
+| `FREE_CREDITS` | Default: `30` |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Optional shared rate limit backend |
+| `STRIPE_SECRET_KEY` / `STRIPE_PRICE_ID` / `STRIPE_WEBHOOK_SECRET` | Optional credit top-ups |
+| `CREDITS_PER_PURCHASE` | Default: `100` |
 
 ## Public API
 

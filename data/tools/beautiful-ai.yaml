@@ -13,4 +13,4 @@ notFor:
   - custom software development
   - cinematic video generation
 tags: [presentations, slides, business, design]
-
+outputTypes: [presentation]

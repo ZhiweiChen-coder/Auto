@@ -1,0 +1,18 @@
+id: devin
+name: Devin
+url: https://devin.ai
+category: coding
+deployment: saas
+pricing: paid
+description: Cognition's autonomous software engineering agent that plans, writes, tests, and ships code across a real dev environment.
+bestFor:
+  - delegating well-scoped engineering tasks end to end
+  - bug fixes and migrations across a repo
+  - parallelizing routine dev work
+notFor:
+  - quick inline autocomplete in your editor
+  - non-technical users
+tags: [coding, agent, autonomous, swe]
+requiresCoding: true
+difficulty: advanced
+outputTypes: [code]

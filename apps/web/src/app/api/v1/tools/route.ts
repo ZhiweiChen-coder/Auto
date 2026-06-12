@@ -1,6 +1,6 @@
 import { type ToolCategory } from "@auto/catalog";
 import { getCatalogTools } from "@/lib/catalog";
-import { jsonResponse } from "@/lib/api";
+import { jsonResponse, preflightResponse } from "@/lib/api";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -27,5 +27,5 @@ export async function GET(request: Request) {
 }
 
 export async function OPTIONS() {
-  return jsonResponse({}, { status: 204 });
+  return preflightResponse();
 }

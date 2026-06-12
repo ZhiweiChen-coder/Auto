@@ -1,0 +1,18 @@
+id: cline
+name: Cline
+url: https://cline.bot
+category: coding
+deployment: local
+pricing: free
+description: Open-source autonomous coding agent for VS Code that plans and edits across files, runs commands, and works with any model via your key.
+bestFor:
+  - agentic edits inside VS Code
+  - bring-your-own-key coding with open models
+  - reviewing each step the agent takes
+notFor:
+  - non-developers
+  - users who want a hosted no-setup tool
+tags: [coding, agent, vscode, open-source]
+requiresCoding: true
+difficulty: medium
+outputTypes: [code]

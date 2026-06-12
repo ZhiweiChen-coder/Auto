@@ -17,28 +17,36 @@ function countByRating(records: FeedbackRecord[], rating: FeedbackRecord["rating
 
 export default async function FeedbackAdminPage() {
   if (!(await isAdminAuthenticated())) {
-    redirect("/admin/login");
+    redirect("/?account=signin");
   }
 
   const records = await readLocalFeedback(100);
   const store = process.env.FEEDBACK_STORE ?? "file";
+  const total = records.length;
+  const good = countByRating(records, "good_match");
+  const quality = total === 0 ? 0 : Math.round((good / total) * 100);
 
   return (
     <div className="flex-1 px-6 py-10 sm:px-10">
       <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="commercial-enter flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-canvas-muted">
-              Admin
+              Workspace
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-canvas-text">
-              Feedback
+              Recommendation health
             </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-canvas-muted">
+              Monitor whether Auto is choosing tools people actually want to use.
+            </p>
           </div>
-          <p className="rounded-full bg-canvas-base px-3 py-1 text-xs font-semibold text-canvas-muted">
-            Store: {store}
-          </p>
-          <AdminLogoutButton />
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="rounded-full bg-canvas-base px-3 py-1 text-xs font-semibold text-canvas-muted">
+              Store: {store}
+            </p>
+            <AdminLogoutButton />
+          </div>
         </div>
 
         {store === "webhook" && (
@@ -48,7 +56,18 @@ export default async function FeedbackAdminPage() {
           </div>
         )}
 
-        <section className="mt-6 grid gap-3 sm:grid-cols-3">
+        <section className="commercial-enter-delayed mt-6 grid gap-3 sm:grid-cols-4">
+          <div className="rounded-2xl bg-canvas-text p-5 text-white shadow-card">
+            <p className="text-sm font-semibold text-white/55">
+              Match quality
+            </p>
+            <p className="mt-2 text-3xl font-bold">
+              {quality}%
+            </p>
+            <p className="mt-2 text-xs text-white/45">
+              based on positive feedback
+            </p>
+          </div>
           {(["good_match", "not_right", "too_advanced"] as const).map((rating) => (
             <div
               key={rating}
@@ -64,7 +83,7 @@ export default async function FeedbackAdminPage() {
           ))}
         </section>
 
-        <section className="mt-6 overflow-hidden rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60">
+        <section className="result-enter mt-6 overflow-hidden rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60">
           <div className="border-b border-canvas-border px-5 py-4">
             <h2 className="text-lg font-bold text-canvas-text">
               Latest responses

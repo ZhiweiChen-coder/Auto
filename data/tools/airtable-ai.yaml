@@ -13,4 +13,4 @@ notFor:
   - one-off image generation
   - local offline automation
 tags: [automation, database, operations, no-code]
-
+outputTypes: [automation]

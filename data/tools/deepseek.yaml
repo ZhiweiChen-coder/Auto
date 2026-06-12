@@ -1,0 +1,17 @@
+id: deepseek
+name: DeepSeek
+url: https://chat.deepseek.com
+category: general
+deployment: saas
+pricing: freemium
+description: Open-weight Chinese LLM family strong at math, coding, and step-by-step reasoning, with a free web chat and cheap API.
+bestFor:
+  - cost-sensitive reasoning and coding help
+  - math and logic problems
+  - Chinese and English bilingual tasks
+notFor:
+  - image or video generation
+  - polished enterprise support guarantees
+tags: [chat, reasoning, coding, open-weight]
+supportsChinese: true
+outputTypes: [document, code]

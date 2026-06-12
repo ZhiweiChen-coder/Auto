@@ -13,4 +13,4 @@ notFor:
   - no-code website building
   - AI image generation
 tags: [coding, codebase, ide, search]
-
+outputTypes: [code]

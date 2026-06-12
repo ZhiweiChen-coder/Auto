@@ -1,0 +1,17 @@
+id: sora
+name: Sora
+url: https://sora.com
+category: video
+deployment: saas
+pricing: paid
+description: OpenAI's text-to-video model that generates realistic and stylized video clips from prompts, with remix and storyboard tools.
+bestFor:
+  - generating short video clips from text
+  - concept and mood films from prompts
+  - creative video experimentation
+notFor:
+  - precise frame-accurate editing
+  - long-form films out of the box
+tags: [video, generation, text-to-video, openai]
+difficulty: medium
+outputTypes: [video]

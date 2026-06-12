@@ -13,3 +13,4 @@ notFor:
   - building production applications
   - offline or fully private workflows
 tags: [search, citations, research, web]
+outputTypes: [research]

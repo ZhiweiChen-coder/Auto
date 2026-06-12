@@ -13,4 +13,4 @@ notFor:
   - polished design templates
   - hosted web app deployment
 tags: [local, llm, open-source, privacy]
-
+outputTypes: [document]

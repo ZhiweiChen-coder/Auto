@@ -13,4 +13,4 @@ notFor:
   - source-cited research
   - no-code workflow automation
 tags: [image, design, posters, logos]
-
+outputTypes: [image]

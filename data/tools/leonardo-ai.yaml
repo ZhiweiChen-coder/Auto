@@ -13,4 +13,4 @@ notFor:
   - document summarization
   - app deployment
 tags: [image, art, game-assets, design]
-
+outputTypes: [image]

@@ -13,3 +13,4 @@ notFor:
   - live web search with citations (use a search tool)
   - one-click deployed web apps
 tags: [writing, chat, anthropic, reasoning]
+outputTypes: [document, code]

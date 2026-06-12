@@ -1,0 +1,17 @@
+id: udio
+name: Udio
+url: https://www.udio.com
+category: general
+deployment: saas
+pricing: freemium
+description: AI music generator that creates full songs with vocals and instrumentation from a text prompt, with editing and extension tools.
+bestFor:
+  - generating original songs from a prompt
+  - background music and demos
+  - experimenting with styles and lyrics
+notFor:
+  - licensed commercial catalog music
+  - precise multitrack studio production
+tags: [audio, music, generation, vocals]
+bestForBeginners: true
+outputTypes: [audio]

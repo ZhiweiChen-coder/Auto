@@ -1,0 +1,18 @@
+id: wordtune
+name: Wordtune
+url: https://www.wordtune.com
+category: writing
+deployment: saas
+pricing: freemium
+description: AI rewriting assistant that rephrases, shortens, and adjusts tone of your sentences for clearer, more natural writing.
+bestFor:
+  - rephrasing and polishing sentences
+  - adjusting tone and length
+  - non-native English writing help
+notFor:
+  - long-form generation from scratch
+  - code or technical specs
+tags: [writing, rewriting, editing, tone]
+bestForBeginners: true
+difficulty: easy
+outputTypes: [document]

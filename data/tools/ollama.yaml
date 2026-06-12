@@ -13,3 +13,4 @@ notFor:
   - instant zero-setup web search
   - non-technical users without install steps
 tags: [local, llm, open-source, privacy]
+outputTypes: [document]

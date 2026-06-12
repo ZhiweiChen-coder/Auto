@@ -1,0 +1,18 @@
+id: gpt4all
+name: GPT4All
+url: https://www.nomic.ai/gpt4all
+category: local
+deployment: local
+pricing: free
+description: Free desktop app from Nomic for running open-source LLMs fully offline on your own machine, with local document chat.
+bestFor:
+  - running LLMs offline for free
+  - private chat over local documents
+  - low-friction local model setup
+notFor:
+  - frontier-level model quality
+  - heavy multi-user serving
+tags: [local, offline, open-source, privacy]
+difficulty: easy
+bestForBeginners: true
+outputTypes: [document]

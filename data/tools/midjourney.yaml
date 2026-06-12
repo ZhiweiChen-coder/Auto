@@ -12,3 +12,4 @@ notFor:
   - precise UI mockups for dev handoff
   - video generation
 tags: [image, art, creative, discord]
+outputTypes: [image]

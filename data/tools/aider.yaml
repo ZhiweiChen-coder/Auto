@@ -1,0 +1,18 @@
+id: aider
+name: Aider
+url: https://aider.chat
+category: coding
+deployment: local
+pricing: free
+description: Open-source terminal pair programmer that edits your local git repo with the LLM of your choice and auto-commits changes.
+bestFor:
+  - AI pair programming in the terminal
+  - working with your own API keys and local repo
+  - precise git-tracked edits
+notFor:
+  - users who want a GUI editor
+  - non-technical users
+tags: [coding, cli, open-source, git]
+requiresCoding: true
+difficulty: medium
+outputTypes: [code]
