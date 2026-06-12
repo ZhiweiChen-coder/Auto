@@ -23,8 +23,10 @@ export function ToolCard({
 
   return (
     <article
-      className={`lift rounded-2xl bg-canvas-white p-6 shadow-soft ring-1 ring-canvas-border/60 hover:shadow-card ${
-        isPrimary ? "ring-2 ring-canvas-brand/25 shadow-card" : ""
+      className={`rounded-2xl border bg-canvas-white p-6 transition-colors ${
+        isPrimary
+          ? "border-canvas-brand/40 shadow-soft"
+          : "border-canvas-border hover:border-canvas-text/20"
       }`}
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -44,7 +46,7 @@ export function ToolCard({
       </div>
       <div className="flex items-center gap-3">
         <ToolLogo name={tool.name} url={tool.url} className="h-14 w-14" />
-        <h3 className="text-xl font-bold text-canvas-text">{tool.name}</h3>
+        <h3 className="text-xl font-semibold text-canvas-text">{tool.name}</h3>
       </div>
       <p className="mt-1 text-sm text-canvas-muted">{tool.description}</p>
       {reason && (

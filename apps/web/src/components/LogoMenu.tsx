@@ -366,12 +366,12 @@ export function LogoMenu() {
       >
         <span className="relative">
           <span
-            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-canvas-brand to-[#C77DFF] text-lg font-bold text-white shadow-soft transition-transform ${
-              open ? "scale-95 ring-2 ring-canvas-brand/30" : "group-hover:scale-[1.02]"
+            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-canvas-text font-serif text-xl text-white transition-transform ${
+              open ? "scale-95" : "group-hover:scale-[1.02]"
             } ${session.authenticated ? "ring-2 ring-emerald-400/80 ring-offset-2 ring-offset-canvas-white" : ""}`}
           >
             {session.authenticated ? (
-              <span className="text-sm font-bold tracking-tight">Ad</span>
+              <span className="text-sm font-semibold tracking-tight">Ad</span>
             ) : (
               "A"
             )}

@@ -1,15 +1,15 @@
 export default function ResultsLoading() {
   return (
     <div className="flex flex-1 items-center justify-center px-6 py-12">
-      <div className="loading-panel w-full max-w-2xl rounded-[32px] bg-white/80 p-8 shadow-card ring-1 ring-canvas-border/70">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-canvas-text text-lg font-bold text-white shadow-soft">
+      <div className="loading-panel w-full max-w-2xl rounded-3xl border border-canvas-border bg-canvas-white p-8 shadow-soft">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-canvas-text text-lg font-semibold text-white">
           A
         </div>
         <div className="mt-6 text-center">
-          <p className="text-sm font-semibold text-canvas-brand">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-canvas-subtle">
             Preparing Auto
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-canvas-text">
+          <h1 className="mt-2 font-serif text-3xl font-normal text-canvas-text">
             Loading the catalog
           </h1>
         </div>

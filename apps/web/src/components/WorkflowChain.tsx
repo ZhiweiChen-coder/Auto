@@ -16,11 +16,11 @@ function getToolById(tools: Tool[], id: string) {
 export function WorkflowChain({ workflow, tools }: WorkflowChainProps) {
   return (
     <section className="result-enter space-y-5">
-      <div className="rounded-[28px] bg-canvas-text p-6 text-white shadow-card sm:p-7">
-        <p className="text-xs font-bold uppercase tracking-wide text-white/60">
+      <div className="rounded-3xl bg-canvas-text p-6 text-white shadow-soft sm:p-7">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
           Recommended workflow
         </p>
-        <h1 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+        <h1 className="mt-3 font-serif text-3xl font-normal leading-[1.05] sm:text-4xl">
           {workflow.steps.length} steps · {workflow.toolCount} tools
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75">
@@ -52,7 +52,7 @@ export function WorkflowChain({ workflow, tools }: WorkflowChainProps) {
           return (
             <li key={step.order} className="relative">
               <article
-                className="workflow-step lift rounded-2xl bg-canvas-white p-5 shadow-soft ring-1 ring-canvas-border/60 hover:shadow-card"
+                className="workflow-step rounded-2xl border border-canvas-border bg-canvas-white p-5 transition-colors hover:border-canvas-text/20"
                 style={{ animationDelay: stepDelay }}
               >
                 <div className="flex items-start gap-4">

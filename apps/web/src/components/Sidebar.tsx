@@ -56,10 +56,10 @@ export function Sidebar() {
       <Suspense
         fallback={
           <div className="mr-4 flex flex-col items-center gap-0.5 sm:mb-8 sm:mr-0">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-canvas-brand to-[#C77DFF] text-lg font-bold text-white shadow-soft">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-canvas-text font-serif text-xl text-white">
               A
             </span>
-            <span className="hidden text-[10px] font-bold tracking-tight text-canvas-text sm:block">
+            <span className="hidden text-[10px] font-semibold tracking-tight text-canvas-text sm:block">
               Auto
             </span>
           </div>
@@ -83,8 +83,8 @@ export function Sidebar() {
               aria-current={active ? "page" : undefined}
               className={`flex h-12 w-14 flex-col items-center justify-center gap-0.5 rounded-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-canvas-brand ${
                 active
-                  ? "bg-canvas-brandLight text-canvas-brand"
-                  : "text-canvas-muted hover:bg-canvas-base"
+                  ? "bg-canvas-base text-canvas-text"
+                  : "text-canvas-subtle hover:bg-canvas-base hover:text-canvas-text"
               }`}
             >
               <Icon />

@@ -24,22 +24,11 @@ function getToolById(tools: Tool[], id: string) {
   return tools.find((tool) => tool.id === id);
 }
 
-function routeTone(label: string) {
-  if (label === "Fastest route") {
-    return {
-      ring: "ring-sky-100",
-      badge: "bg-sky-50 text-sky-700",
-    };
-  }
-  if (label === "Cheapest route") {
-    return {
-      ring: "ring-emerald-100",
-      badge: "bg-emerald-50 text-emerald-700",
-    };
-  }
+function routeTone(_label: string) {
+  // Editorial: one restrained neutral treatment; the label names the route.
   return {
-    ring: "ring-amber-100",
-    badge: "bg-amber-50 text-amber-700",
+    ring: "border-canvas-border",
+    badge: "border border-canvas-border text-canvas-muted",
   };
 }
 
@@ -147,7 +136,7 @@ function LiveChain({
 
   return (
     <section
-      className={`result-chain rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60 ${
+      className={`result-chain rounded-3xl border border-canvas-border bg-canvas-white shadow-soft ${
         phase === "loading" ? "p-6" : "p-4"
       }`}
     >
@@ -351,7 +340,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
         />
 
         {phase === "loading" && (
-          <div className="route-shimmer rounded-[28px] bg-canvas-white/70 p-6 shadow-soft ring-1 ring-canvas-border/60">
+          <div className="route-shimmer rounded-3xl border border-canvas-border bg-canvas-white p-6">
             <div className="h-4 w-24 rounded-full bg-canvas-base" />
             <div className="mt-5 h-8 w-52 rounded-full bg-canvas-base" />
             <div className="mt-4 h-3 w-full max-w-lg rounded-full bg-canvas-base" />
@@ -418,14 +407,14 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
         {phase === "ready" && result && primary && (
           <div className="result-enter space-y-6">
             <section className="grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
-              <article className="overflow-hidden rounded-[28px] bg-canvas-text text-white shadow-card">
+              <article className="overflow-hidden rounded-3xl bg-canvas-text text-white shadow-soft">
                 <div className="p-6 sm:p-7">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-wide text-white/60">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
                         Best pick
                       </p>
-                      <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+                      <h1 className="mt-3 font-serif text-4xl font-normal leading-[1.05] sm:text-5xl">
                         {primary.name}
                       </h1>
                     </div>
@@ -464,9 +453,9 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
               </article>
 
               {result.actionGuide && (
-                <article className="rounded-[28px] bg-canvas-white p-6 shadow-card ring-1 ring-canvas-border/60">
+                <article className="rounded-3xl border border-canvas-border bg-canvas-white p-6">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-xs font-bold uppercase tracking-wide text-canvas-muted">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-canvas-muted">
                       Do this
                     </p>
                     <PromptCopyButton prompt={result.actionGuide.copyPrompt} />
@@ -520,7 +509,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
 
             {result.routeCards && result.routeCards.length > 0 && (
               <section>
-                <h2 className="mb-3 text-lg font-bold text-canvas-text">Other paths</h2>
+                <h2 className="mb-3 text-lg font-semibold text-canvas-text">Other paths</h2>
                 <div className="grid gap-3 md:grid-cols-3">
                   {result.routeCards.map((route) => {
                     const routeTools = route.toolIds
@@ -531,10 +520,10 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                     return (
                       <article
                         key={route.label}
-                        className={`lift rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 hover:shadow-card ${tone.ring}`}
+                        className={`rounded-2xl border bg-canvas-white p-4 transition-colors hover:border-canvas-text/20 ${tone.ring}`}
                       >
                         <span
-                          className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${tone.badge}`}
+                          className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${tone.badge}`}
                         >
                           {route.label.replace(" route", "")}
                         </span>
@@ -549,7 +538,7 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
                                 href={tool.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="press rounded-full bg-canvas-brandLight px-3 py-1 text-xs font-semibold text-canvas-brand hover:bg-canvas-brand hover:text-white"
+                                className="press rounded-full border border-canvas-border px-3 py-1 text-xs font-semibold text-canvas-text transition-colors hover:border-canvas-text"
                               >
                                 {tool.name}
                               </a>
@@ -565,16 +554,16 @@ export function ResultsClient({ initialQuery, tools }: ResultsClientProps) {
 
             {alternatives.length > 0 && (
               <section>
-                <h2 className="mb-3 text-lg font-bold text-canvas-text">
+                <h2 className="mb-3 text-lg font-semibold text-canvas-text">
                   Alternatives
                 </h2>
                 <div className="grid gap-3 md:grid-cols-2">
                   {alternatives.map(({ rec, tool }) => (
                     <article
                       key={tool.id}
-                      className="lift rounded-2xl bg-canvas-white p-4 shadow-soft ring-1 ring-canvas-border/60 hover:shadow-card"
+                      className="rounded-2xl border border-canvas-border bg-canvas-white p-4 transition-colors hover:border-canvas-text/20"
                     >
-                      <h3 className="text-lg font-bold text-canvas-text">
+                      <h3 className="text-lg font-semibold text-canvas-text">
                         {tool.name}
                       </h3>
                       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-canvas-muted">

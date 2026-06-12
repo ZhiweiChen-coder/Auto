@@ -2,17 +2,20 @@ export default function DocsPage() {
   const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10">
-      <div className="mx-auto max-w-2xl prose prose-slate">
-        <h1 className="text-3xl font-bold text-canvas-text">API</h1>
+    <div className="flex-1 overflow-y-auto px-6 py-12 sm:px-10 sm:py-16">
+      <div className="mx-auto max-w-2xl">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-canvas-subtle">
+          Reference
+        </p>
+        <h1 className="mt-3 font-serif text-5xl font-normal text-canvas-text">API</h1>
         <p className="mt-2 text-canvas-muted">
           Auto recommends tools — it does not answer your task. All endpoints
           return JSON.
         </p>
 
         <section className="mt-10 space-y-6 text-sm text-canvas-text">
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">POST /api/v1/recommend</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">POST /api/v1/recommend</h2>
             <p className="mt-2 text-canvas-muted">
               Body: <code className="text-canvas-brand">{`{ "query": string, "limit"?: 0-3, "mode"?: "auto" | "workflow" }`}</code>
             </p>
@@ -53,43 +56,43 @@ export default function DocsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">GET /api/v1/config</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">GET /api/v1/config</h2>
             <p className="mt-2 text-canvas-muted">
               Public client config for BYOK prompts and deployment mode.
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">GET /api/v1/credits</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">GET /api/v1/credits</h2>
             <p className="mt-2 text-canvas-muted">
               Returns whether this deployment is metered and the current credit
               balance when applicable.
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">POST /api/v1/checkout</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">POST /api/v1/checkout</h2>
             <p className="mt-2 text-canvas-muted">
               Creates a Stripe Checkout Session for credit top-ups when Stripe
               is configured.
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">GET /api/v1/tools</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">GET /api/v1/tools</h2>
             <p className="mt-2 text-canvas-muted">
               Query: <code>?category=search&page=1&pageSize=50</code>
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">GET /api/v1/tools/:id</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">GET /api/v1/tools/:id</h2>
             <p className="mt-2 text-canvas-muted">Single tool from the catalog.</p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">POST /api/v1/feedback</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">POST /api/v1/feedback</h2>
             <p className="mt-2 text-canvas-muted">
               Body:{" "}
               <code className="text-canvas-brand">
@@ -101,8 +104,8 @@ export default function DocsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-canvas-white p-5 shadow-soft">
-            <h2 className="font-bold">GET /api/v1/health</h2>
+          <div className="rounded-2xl border border-canvas-border bg-canvas-white p-5">
+            <h2 className="font-semibold">GET /api/v1/health</h2>
             <p className="mt-2 text-canvas-muted">Status and catalog version.</p>
           </div>
 

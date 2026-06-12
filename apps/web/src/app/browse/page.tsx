@@ -44,18 +44,23 @@ export default async function BrowsePage({ searchParams }: PageProps) {
     : tools;
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-10 sm:px-10">
+    <div className="flex-1 overflow-y-auto px-6 py-12 sm:px-10 sm:py-16">
       <div className="mx-auto max-w-4xl">
-        <h1 className="text-3xl font-bold text-canvas-text">Tools</h1>
-        <p className="mt-1 text-canvas-muted">Curated AI products · open source catalog</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-canvas-subtle">
+          Open-source catalog
+        </p>
+        <h1 className="mt-3 font-serif text-5xl font-normal text-canvas-text">Tools</h1>
+        <p className="mt-2 text-canvas-muted">
+          Curated AI products, one per job.
+        </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-8 flex flex-wrap gap-2">
           <Link
             href="/browse"
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
               !category
-                ? "bg-canvas-brand text-white"
-                : "bg-canvas-white text-canvas-muted shadow-soft hover:text-canvas-text"
+                ? "border-canvas-text bg-canvas-text text-white"
+                : "border-canvas-border text-canvas-muted hover:border-canvas-text hover:text-canvas-text"
             }`}
           >
             All
@@ -64,10 +69,10 @@ export default async function BrowsePage({ searchParams }: PageProps) {
             <Link
               key={c}
               href={`/browse?category=${c}`}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                 category === c
-                  ? "bg-canvas-brand text-white"
-                  : "bg-canvas-white text-canvas-muted shadow-soft hover:text-canvas-text"
+                  ? "border-canvas-text bg-canvas-text text-white"
+                  : "border-canvas-border text-canvas-muted hover:border-canvas-text hover:text-canvas-text"
               }`}
             >
               {categoryLabels[c]}

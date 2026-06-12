@@ -34,7 +34,7 @@ export function BrowseSearch({ tools }: { tools: Tool[] }) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search tools…"
-            className="w-full rounded-full border border-canvas-border bg-canvas-white px-5 py-2.5 text-sm shadow-soft placeholder:text-canvas-subtle focus:border-canvas-brand focus:outline-none focus:ring-2 focus:ring-canvas-brand/20"
+            className="w-full rounded-full border border-canvas-border bg-canvas-white px-5 py-2.5 text-sm placeholder:text-canvas-subtle focus:border-canvas-brand/45 focus:outline-none"
           />
         </label>
         <p className="text-sm font-medium text-canvas-muted">
@@ -45,7 +45,7 @@ export function BrowseSearch({ tools }: { tools: Tool[] }) {
         {filtered.map((tool) => (
           <li
             key={tool.id}
-            className="rounded-2xl bg-canvas-white p-5 shadow-soft ring-1 ring-canvas-border/50 transition-all hover:-translate-y-0.5 hover:shadow-card"
+            className="rounded-2xl border border-canvas-border bg-canvas-white p-5 transition-colors hover:border-canvas-text/20"
           >
             <div className="mb-4 flex items-start justify-between gap-3">
               <div className="flex flex-wrap gap-2">
@@ -55,7 +55,7 @@ export function BrowseSearch({ tools }: { tools: Tool[] }) {
               </div>
               <ToolLogo name={tool.name} url={tool.url} className="h-12 w-12" />
             </div>
-            <h2 className="font-bold text-canvas-text">{tool.name}</h2>
+            <h2 className="text-lg font-semibold text-canvas-text">{tool.name}</h2>
             <p className="mt-1 line-clamp-2 text-sm text-canvas-muted">
               {tool.description}
             </p>
