@@ -42,8 +42,8 @@ export function SearchForm({
   return (
     <form onSubmit={onSubmit} className="w-full">
       <div
-        className={`hero-search relative rounded-[28px] bg-canvas-white shadow-card ring-1 ring-canvas-border/60 ${
-          isHero ? "min-h-[190px] sm:min-h-[220px]" : "min-h-[92px]"
+        className={`hero-search relative rounded-3xl border border-canvas-border bg-canvas-white shadow-soft ${
+          isHero ? "min-h-[180px] sm:min-h-[208px]" : "min-h-[92px]"
         }`}
       >
         <textarea
@@ -74,7 +74,7 @@ export function SearchForm({
           )}
           <button
             type="submit"
-            className="lift press rounded-full bg-canvas-brand px-6 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-canvas-brandHover"
+            className="press rounded-full bg-canvas-text px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-black"
           >
             Recommend
           </button>

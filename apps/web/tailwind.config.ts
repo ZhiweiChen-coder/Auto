@@ -6,12 +6,15 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       colors: {
         canvas: {
           base: "#F4F4F6",
+          paper: "#FCFCFB",
           white: "#FFFFFF",
           border: "#E8E8ED",
+          hairline: "#EFEFF1",
           text: "#1D1D1F",
           muted: "#6E6E73",
           subtle: "#AEAEB2",

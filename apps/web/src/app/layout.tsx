@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import { AppShell } from "@/components/AppShell";
 import "./globals.css";
 
@@ -7,6 +7,15 @@ const sans = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+// Editorial display face for headlines — a high-contrast serif paired with the
+// geometric sans for body copy. Applied via the `font-serif` utility.
+const serif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.variable} font-sans`}
+        className={`${sans.variable} ${serif.variable} font-sans`}
         suppressHydrationWarning
       >
         <AppShell>{children}</AppShell>

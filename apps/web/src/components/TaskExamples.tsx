@@ -25,19 +25,16 @@ const EXAMPLES = [
 
 export function TaskExamples({ onPick }: { onPick: (query: string) => void }) {
   return (
-    <section className="mt-5">
-      <div className="flex flex-wrap justify-center gap-2">
+    <section className="mt-7">
+      <div className="flex flex-wrap justify-center gap-2.5">
         {EXAMPLES.map((item) => (
           <button
             key={item.label}
             type="button"
             onClick={() => onPick(item.prompt)}
             title={item.prompt}
-            className="group inline-flex items-center gap-2 rounded-full border border-canvas-border bg-white/70 px-3.5 py-2 text-sm font-semibold text-canvas-muted shadow-soft transition-all hover:-translate-y-0.5 hover:border-canvas-brand hover:text-canvas-text hover:shadow-card"
+            className="inline-flex items-center rounded-full border border-canvas-border bg-transparent px-4 py-2 text-sm text-canvas-muted transition-colors hover:border-canvas-text hover:text-canvas-text"
           >
-            <span
-              className={`h-2.5 w-2.5 shrink-0 rounded-full ${item.accent}`}
-            />
             {item.label}
           </button>
         ))}

@@ -12,9 +12,7 @@
 }
 
 body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 247, 251, 0.92)),
-    #f6f7fb;
+  background: #fcfcfb;
   color: #1d1d1f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -209,12 +207,15 @@ body {
   overflow: hidden;
 }
 
+/* A single, barely-there warm wash behind the hero — keeps the editorial
+   white calm but not flat. No grid, no motion. */
 .home-stage::before {
-  animation: soft-grid 16s linear infinite;
-  background-image:
-    linear-gradient(rgba(29, 29, 31, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29, 29, 31, 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background:
+    radial-gradient(
+      120% 70% at 50% -10%,
+      rgba(139, 61, 255, 0.05) 0%,
+      transparent 60%
+    );
   content: "";
   inset: 0;
   pointer-events: none;
@@ -413,14 +414,16 @@ body {
 
 /* Hero headline — near-black with a hint of brand at the tail for depth. */
 .hero-title {
-  background: linear-gradient(116deg, #1d1d1f 0%, #1d1d1f 52%, #6d3df0 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  /* text-6xl ships line-height:1, which clips gradient-clipped descenders
-     (the "g" in "right"). Loosen the line box and pad the bottom edge. */
-  line-height: 1.1;
-  padding-bottom: 0.08em;
+  color: #1d1d1f;
+  /* Editorial serif display — give descenders room and tighten the optical
+     spacing a touch for a refined headline. */
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  padding-bottom: 0.06em;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent, #8b3dff);
 }
 
 /* Eyebrow status dot — a slow, quiet pulse that signals "live". */
@@ -439,16 +442,17 @@ body {
   animation: eyebrow-pulse 2.6s ease-in-out infinite;
 }
 
-/* Hero search field — soft brand-tinted ring + glow when focused. */
+/* Hero search field — hairline border that warms to brand on focus, with a
+   soft low glow. Restrained to match the editorial surface. */
 .hero-search {
   transition:
     box-shadow var(--dur-base) var(--ease-out-expo),
+    border-color var(--dur-base) var(--ease-out-expo),
     transform var(--dur-base) var(--ease-out-expo);
 }
 .hero-search:focus-within {
-  box-shadow:
-    0 0 0 1px rgba(109, 61, 240, 0.4),
-    0 18px 50px rgba(91, 58, 166, 0.16);
+  border-color: rgba(139, 61, 255, 0.45);
+  box-shadow: 0 12px 40px rgba(139, 61, 255, 0.1);
 }
 
 @media (prefers-reduced-motion: reduce) {
