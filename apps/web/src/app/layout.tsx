@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "Auto — Find the right AI tool",
   description:
     "Tell Auto what you want to do. Get the best existing AI product for the job.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
