@@ -21,6 +21,18 @@ for (const envPath of [
 const nextConfig: NextConfig = {
   transpilePackages: ["@auto/catalog", "@auto/core"],
   serverExternalPackages: ["openai"],
+  // The workspace packages are consumed as TypeScript source (their entry now
+  // points at src/index.ts so no prebuilt dist is required on Vercel). Their
+  // source uses NodeNext ESM specifiers (e.g. import "./paths.js" resolving to
+  // paths.ts), which webpack won't map on its own. Teach the resolver to try
+  // the .ts/.tsx source when an import asks for .js/.mjs.
+  webpack: (config) => {
+    config.resolve.extensionAlias = {
+      ".js": [".ts", ".tsx", ".js"],
+      ".mjs": [".mts", ".mjs"],
+    };
+    return config;
+  },
   // The catalog (data/tools) and embeddings (data/embeddings.json) live at the
   // monorepo root and are read at runtime via fs from resolved paths. Next's
   // static tracer can't follow those dynamic reads, so on Vercel the serverless
